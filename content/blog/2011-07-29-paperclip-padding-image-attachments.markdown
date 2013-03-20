@@ -1,7 +1,7 @@
 ---
-layout: post
+kind: article
 title: "Paperclip: Padding Image Attachments"
-date: 2011-01-26 10:59
+created_at: 2011-01-26 10:59
 comments: true
 categories: 
 ---

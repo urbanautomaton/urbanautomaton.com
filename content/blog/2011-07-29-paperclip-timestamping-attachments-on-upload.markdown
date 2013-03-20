@@ -1,7 +1,7 @@
 ---
-layout: post
+kind: article
 title: "Paperclip: Timestamping Attachments on Upload"
-date: 2011-04-22 10:58
+created_at: 2011-04-22 10:58
 comments: true
 categories: 
 ---

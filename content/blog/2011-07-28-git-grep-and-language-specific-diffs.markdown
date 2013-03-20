@@ -1,7 +1,7 @@
 ---
-layout: post
+kind: article
 title: "git grep and language-aware diffs"
-date: 2011-07-28 17:56
+created_at: 2011-07-28 17:56
 comments: true
 categories: 
 ---

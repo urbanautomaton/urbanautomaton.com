@@ -18,7 +18,7 @@ compile '/stylesheet/' do
 end
 
 compile '/' do
-  filter :highlit_markdown
+  filter :haml
   layout 'default'
 end
 

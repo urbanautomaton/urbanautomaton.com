@@ -1,7 +1,7 @@
 ---
-layout: post
+kind: article
 title: "Enough Magic"
-date: 2011-12-21 21:42
+created_at: 2011-12-21 21:42
 comments: true
 categories: 
 ---
