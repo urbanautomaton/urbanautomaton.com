@@ -1,0 +1,19 @@
+!!!
+%html{ :lang => "en" }
+  %head
+    %meta{ :charset => "utf-8" }
+    %title
+      Urbanautomaton -
+      = @item[:title]
+    %link{ :rel => "stylesheet", :href => "/style.css" }
+    %meta{ :name => "generator", :content => "nanoc #{Nanoc::VERSION}" }
+  %body
+    #main
+      = yield
+    #sidebar
+      %h2 Documentation
+      %ul
+        %li
+          %a{ :href => "http://nanoc.ws/docs/"} Documentation
+        %li
+          %a{ :href => "http://nanoc.ws/docs/tutorial/" }Getting Started
