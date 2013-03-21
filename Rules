@@ -17,13 +17,20 @@ compile '/stylesheet/' do
   # don’t filter or layout
 end
 
-compile '/' do
-  filter :haml
-  layout 'default'
+compile '/style/_*/' do
 end
 
-compile '/blog/*' do
+compile '/style/*/' do
+  filter :sass, Compass.sass_engine_options
+end
+
+compile '/blog/*/' do
   filter :highlit_markdown
+  layout 'blog'
+end
+
+compile '/' do
+  filter :haml
   layout 'default'
 end
 
@@ -36,12 +43,12 @@ compile '*' do
   end
 end
 
-route '/stylesheet/' do
-  '/style.css'
+route '/style/*/' do
+  item.identifier.chop + '.css'
 end
 
 route '/blog/*' do
-  item.identifier.gsub(/(\d{4})-(\d{2})-(\d{2})-/, '\1/\2/\3/') + 'index.html'
+  blog_route(item) + 'index.html'
 end
 
 route '*' do

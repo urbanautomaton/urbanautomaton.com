@@ -1,3 +1,6 @@
 *.log
 output/
 tmp/
+.*.swo
+.*.swp
+.sass-cache

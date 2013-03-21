@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'nanoc', '~> 3.6.1'
+gem 'nanoc'
 gem 'adsf'
 gem 'haml'
 gem 'redcarpet'
 gem 'rouge'
+gem 'sass'
+gem 'compass'
+gem 'rb-fsevent'
+gem 'listen'

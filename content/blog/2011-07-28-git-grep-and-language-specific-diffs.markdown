@@ -6,12 +6,6 @@ comments: true
 categories: 
 ---
 
-~~~ ruby
-def thing(arg = :fish)
-  "string"
-end
-~~~
-
 I'm a heavy user of git-diff - before every commit I review my changes
 for a final sanity check. However, I only recently discovered that my
 diffs weren't telling me as much as they might.
@@ -40,7 +34,9 @@ index 6ad43a7..3524d43 100644
 Here we can see some file information, some git object information, and
 then a single diff hunk, prefixed with the header:
 
-    @@ -29,6 +29,7 @@ class LandingPage < ActiveRecord::Base
+~~~ diff
+@@ -29,6 +29,7 @@ class LandingPage < ActiveRecord::Base
+~~~
 
 After the line information there is some local context for the
 hunk. In this case, however, we're only being shown the first line

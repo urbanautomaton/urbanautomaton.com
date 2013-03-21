@@ -3,4 +3,5 @@ title: Home
 ---
 
 - sorted_articles.each do |article|
-  %p= article[:title]
+  %p
+    %a{ :href => blog_route(article) }= article[:title]

@@ -20,30 +20,50 @@ the desired aspect ratio, rather than crop or distort them.
 
 This is very simple to achieve using a custom processor. First, we set
 up a simple model with our desired geometries, and tell Paperclip that
-we want to use a custom processor called <code>Padder</code>:
+we want to use a custom processor called `Padder`:
 
-{% gist 797320 user.rb %}
+~~~ ruby
+class User < ActiveRecord::Base
+  has_attached_file :image,
+    :styles => {
+      :small     => "50x50",
+      :medium    => "130x130>",
+      :large     => "280x280>",
+      :haystacks => "330x330>" },
+    :processors => [:padder]
+end
+~~~
 
-Next, we create our custom <code>Padder</code> processor. This needs
+Next, we create our custom `Padder` processor. This needs
 to go somewhere in our application's auto-load path; I placed it in
-<code>lib/paperclip</code>.
+`lib/paperclip`.
 
 We want to inject our custom behaviour at the
 resizing stage, so we sub-class Paperclip's
 [Thumbnail](http://rdoc.info/github/thoughtbot/paperclip/master/Paperclip/Thumbnail)
-class, and override its <code>#transformation_command</code> method.
+class, and override its `#transformation_command` method.
 This returns an array of strings that are joined to produce an
 ImageMagick convert command. To pad an image to a specified size, we use
-ImageMagick's <code>-extent</code> option with a background colour and
+ImageMagick's `-extent` option with a background colour and
 an alignment. Then we simply append it to the super's transformation
 command:
 
-{% gist 797320 padder.rb %}
+~~~ ruby
+module Paperclip
+  class Padder < Thumbnail
+    def transformation_command
+      super + ["-gravity center",
+               "-background white",
+               "-extent", %["#{geometry_extent}"]]
+    end
 
-The <code>#geometry_extent</code> method just creates a pure geometry
-specification string (without any special imagemagick modifiers). And
-that's all there is to it.
+    def geometry_extent
+      "#{target_geometry.width.to_i}x#{target_geometry.height.to_i}"
+    end
+  end
+end
+~~~
 
-
-
-
+The `#geometry_extent` method just creates a pure geometry specification
+string (without any special imagemagick modifiers). And that's all there
+is to it.

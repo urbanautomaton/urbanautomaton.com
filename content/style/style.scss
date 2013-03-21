@@ -1,0 +1,117 @@
+// compass stuff
+@import "compass/css3/border-radius";
+@import "compass/css3/box-sizing";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "compass/css3/opacity";
+@import "compass/reset";
+
+@import "solarized";
+
+* {
+  @include box-sizing(border-box);
+}
+
+body {
+  background: #fff;
+  line-height: 1.5;
+  font-size: 1.25em;
+  font-family: 'Crimson Text', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
+  color: #444;
+}
+
+pre, code {
+  font-family: monospace;
+  font-size: 15px;
+}
+
+pre, code {
+  @include border-radius(4px);
+  margin-bottom: 1.1em;
+  // @include single-box-shadow();
+}
+
+h1, h2, h3, h4, h5 {
+  color: #222;
+  font-weight: bold;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  line-height: 1.1;
+  margin-top: 1em;
+  margin-bottom: 1.1em;
+}
+
+h2, h3, h4, h5 {
+  line-height: 1.1;
+  margin-top: 1.5em;
+  margin-bottom: 0.25em;
+}
+
+p {
+  margin-bottom: 1.1em;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+#main {
+  position: absolute;
+
+  top: 40px;
+  left: 330px;
+
+  h1 { font-size: 2.369em; }
+  h2 { font-size: 1.777em; }
+  h3 { font-size: 1.333em; }
+  h4 { font-size: 1em;     }
+  h5 { font-size: 0.75em;  }
+
+  ul, ol {
+    margin-bottom: 1.1em;
+  }
+
+  ul {
+    list-style: disc inside;
+  }
+
+  ol {
+    list-style: decimal inside;
+  }
+
+  width: 800px;
+  h1, h2, h3, h4, h5, p {
+    width: 550px;
+  }
+  pre {
+    width: 750px;
+    margin-left: 1.5em;
+  }
+}
+
+#sidebar {
+  position: absolute;
+
+  top: 40px;
+  left: 20px;
+  width: 250px;
+
+  padding: 20px 20px 0 0;
+
+  border-right: 1px solid #ccc;
+
+  text-align: right;
+
+  .nav {
+    li {
+      letter-spacing: 0.5px;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      &.active { font-weight: bold; letter-spacing: normal; }
+    }
+    a { color: #222; }
+  }
+}
+
