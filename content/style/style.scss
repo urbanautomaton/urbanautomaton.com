@@ -1,3 +1,6 @@
+// font collection
+// http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400italic,400,800,600|Merriweather:400,700
+
 // compass stuff
 @import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
@@ -15,8 +18,8 @@
 body {
   background: #fff;
   line-height: 1.5;
-  font-size: 1.25em;
-  font-family: 'Crimson Text', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
+  font-size: 1em;
+  font-family: 'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
   color: #444;
 }
 
@@ -25,16 +28,19 @@ pre, code {
   font-size: 15px;
 }
 
-pre, code {
+pre {
   @include border-radius(4px);
   margin-bottom: 1.1em;
   // @include single-box-shadow();
+  & + p {
+    margin-top: 1.5em;
+  }
 }
 
 h1, h2, h3, h4, h5 {
   color: #222;
   font-weight: bold;
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -46,7 +52,7 @@ h1 {
 h2, h3, h4, h5 {
   line-height: 1.1;
   margin-top: 1.5em;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.5em;
 }
 
 p {
@@ -63,6 +69,11 @@ a {
 
   top: 40px;
   left: 330px;
+
+  p {
+    font-size: 1.1em;
+    em { font-weight: bold; }
+  }
 
   h1 { font-size: 2.369em; }
   h2 { font-size: 1.777em; }
@@ -82,12 +93,12 @@ a {
     list-style: decimal inside;
   }
 
-  width: 800px;
+  width: 700px;
   h1, h2, h3, h4, h5, p {
     width: 550px;
   }
   pre {
-    width: 750px;
+    // width: 100%;
     margin-left: 1.5em;
   }
 }
@@ -99,7 +110,7 @@ a {
   left: 20px;
   width: 250px;
 
-  padding: 20px 20px 0 0;
+  padding: 20px 20px 20px 0;
 
   border-right: 1px solid #ccc;
 
@@ -107,9 +118,13 @@ a {
 
   .nav {
     li {
+      font-size: 1.25em;
       letter-spacing: 0.5px;
-      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      &.active { font-weight: bold; letter-spacing: normal; }
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      &.active {
+        // font-weight: bold;
+        list-style: disc inside;
+      }
     }
     a { color: #222; }
   }
