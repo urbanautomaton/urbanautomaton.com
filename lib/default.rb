@@ -3,7 +3,7 @@
 
 def site_sections(current)
   [
-    ['urbanautomaton.com', '/', ('active' if current.identifier == '/')],
+    ['home', '/', ('active' if current.identifier == '/')],
     ['blog', '/blog/', ('active' if current.identifier =~ /^\/blog/)],
     ['other', '/other/', nil],
   ]

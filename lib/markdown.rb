@@ -3,6 +3,7 @@ require 'rouge'
 require 'rouge/plugins/redcarpet'
 
 class HighlitHTML < Redcarpet::Render::HTML
+  include Redcarpet::Render::SmartyPants
   include Rouge::Plugins::Redcarpet
 end
 
