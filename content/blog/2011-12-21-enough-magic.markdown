@@ -3,6 +3,7 @@ kind: article
 title: "Enough Magic"
 created_at: 2011-12-21 21:42
 comments: true
+draft: true
 categories: 
 ---
 

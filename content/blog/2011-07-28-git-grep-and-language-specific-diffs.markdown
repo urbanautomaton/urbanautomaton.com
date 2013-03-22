@@ -1,23 +1,22 @@
 ---
 kind: article
-title: "git grep and language-aware diffs"
+title: "'git grep' and Language-Aware Diffs"
 created_at: 2011-07-28 17:56
 comments: true
 categories: 
 ---
 
-I'm a heavy user of git-diff - before every commit I review my changes
+I'm a heavy user of git-diff -- before every commit I review my changes
 for a final sanity check. However, I only recently discovered that my
 diffs weren't telling me as much as they might.
 
 Git's diffs are presented in *hunks*, with each set of adjacent changes
 shown with some surrounding context, and a header line providing further
-contextual information. If I run the command
+contextual information:
 
-    $ git diff app/models/landing_page.rb
-
-I see:
-
+~~~
+$ git diff app/models/landing_page.rb
+~~~
 ~~~ diff
 diff --git a/app/models/landing_page.rb b/app/models/landing_page.rb
 index 6ad43a7..3524d43 100644
