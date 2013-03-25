@@ -51,8 +51,10 @@ credentials for a third-party site. Throw in some more strings for
 location info, maybe an image attachment for a profile picture, and
 before you know it your table is many kilobytes wide.
 
+### The Table
+
 For brevity, we will consider a smallish table (albeit one that could
-probably still use splitting up):
+probably still use splitting up), with timestamps elided:
 
 ~~~
 > DESC users;
@@ -67,8 +69,6 @@ probably still use splitting up):
 | sign_in_count      | int(11)      | YES |      | 0       |
 | last_sign_in_at    | datetime     | YES |      | NULL    |
 | last_sign_in_ip    | varchar(255) | YES |      | NULL    |
-| created_at         | datetime     | YES |      | NULL    |
-| updated_at         | datetime     | YES |      | NULL    |
 | bio                | text         | YES |      | NULL    |
 | image_file_name    | varchar(255) | YES |      | NULL    |
 | image_content_type | varchar(255) | YES |      | NULL    |
@@ -82,5 +82,70 @@ defaults strings to 255 characters, but do you *need* that many? Think
 about your usage. Excessively wide columns cause your database to go to
 disk more frequently than necessary on reads, and cost you extra time on
 writes, particularly if there's an index on the column in question.)
+
+There are several things going on in this table. It's responsible for
+authorization data (`username`, `email`, `encrypted_password`), profile
+information (`name`, `bio`, the image columns), and analytics data (the
+sign-in columns). That's two read-heavy tables (auth, profiles), one
+write-heavy table (analytics), and one join table (auth again). So let's
+split it up accordingly:
+
+* `users` - purely auth info
+
+~~~
++--------------------+--------------+------+-----+---------+
+| Field              | Type         | Null | Key | Default |
++--------------------+--------------+------+-----+---------+
+| id                 | int(11)      | NO   | PRI  | NULL   |
+| username           | varchar(255) | YES  | UNI  | NULL   |
+| email              | varchar(255) | NO   | MUL  |        |
+| encrypted_password | varchar(255) | YES  |      | NULL   |
++--------------------+--------------+------+------+--------+
+~~~
+
+* `user_profiles` - purely profile info
+
+~~~
++--------------------+--------------+------+-----+---------+
+| Field              | Type         | Null | Key | Default |
++--------------------+--------------+------+-----+---------+
+| id                 | int(11)      | NO   | PRI | NULL    |
+| user_id            | int(11)      | NO   | MUL | NULL    |
+| name               | varchar(255) | YES  |     | NULL    |
+| bio                | text         | YES  |     | NULL    |
+| location           | varchar(255) | YES  |     | NULL    |
+| image_file_name    | varchar(255) | YES  |     | NULL    |
+| image_content_type | varchar(255) | YES  |     | NULL    |
+| image_file_size    | int(11)      | YES  |     | NULL    |
++--------------------+--------------+------+-----+---------+
+~~~
+
+
+* `user_trackings` - purely analytics info
+
+~~~
++--------------------+--------------+------+-----+---------+
+| Field              | Type         | Null | Key | Default |
++--------------------+--------------+------+-----+---------+
+| id                 | int(11)      | NO   | PRI | NULL    |
+| user_id            | int(11)      | NO   | MUL | NULL    |
+| sign_in_count      | int(11)      | YES  |     | 0       |
+| last_sign_in_at    | datetime     | YES  |     | NULL    |
+| last_sign_in_ip    | varchar(16)  | YES  |     | NULL    |
++--------------------+--------------+------+-----+---------+
+~~~
+
+This is a substantially nicer schema. Join queries no longer have to
+deal with a variable-width column, because all the key user identifiers
+are in the small `users` table, well away from `bio` data. Our most
+frequently written table, `user_trackings` is now narrow, and doesn't
+cause rewriting of indexed columns like `email` and `username`. Now we
+just need to fix up our model interface.
+
+### The Model
+
+We're going to create two new models to represent these new tables,
+`UserProfile` and `UserTracking`. Then we'll define modules that mimic
+the original interface to the `User` model.
 
 

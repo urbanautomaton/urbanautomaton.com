@@ -13,6 +13,10 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+###############
+# Compilation #
+###############
+
 compile '/style/_*/' do
 end
 
@@ -20,9 +24,18 @@ compile '/style/*/' do
   filter :sass, Compass.sass_engine_options
 end
 
+compile '/blog/feed/' do
+  filter :erb
+end
+
 compile '/blog/*/' do
   filter :highlit_markdown
-  layout 'blog'
+  layout 'default'
+end
+
+compile '/blog/' do
+  filter :haml
+  layout 'default'
 end
 
 compile '/' do
@@ -39,6 +52,10 @@ compile '*' do
   end
 end
 
+###########
+# Routing #
+###########
+
 route '/style/_*/' do
   nil
 end
@@ -47,7 +64,11 @@ route '/style/*/' do
   item.identifier.chop + '.css'
 end
 
-route '/blog/*' do
+route '/blog/feed/' do
+  '/atom.xml'
+end
+
+route '/blog/*/' do
   blog_route(item) + 'index.html'
 end
 
@@ -60,5 +81,9 @@ route '*' do
     item.identifier + 'index.html'
   end
 end
+
+###########
+# Layouts #
+###########
 
 layout '*', :haml

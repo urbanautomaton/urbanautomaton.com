@@ -5,6 +5,8 @@ def site_sections(current)
   [
     ['home', '/', ('active' if current.identifier == '/')],
     ['blog', '/blog/', ('active' if current.identifier =~ /^\/blog/)],
-    ['other', '/other/', nil],
+    ['twitter', 'https://twitter.com/urbanautomaton', nil],
+    ['deadbadger.net', 'http://www.deadbadger.net', nil],
+    # ['other', '/other/', nil],
   ]
 end

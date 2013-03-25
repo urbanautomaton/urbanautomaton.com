@@ -10,8 +10,7 @@
     %meta{ :name => "generator", :content => "nanoc #{Nanoc::VERSION}" }
   %body
     #main
-      - unless @item[:title] == "Home"
-        %h1= @item[:title]
+      %h1= @item[:title]
       = yield
       - if @item[:comments]
         #disqus_thread

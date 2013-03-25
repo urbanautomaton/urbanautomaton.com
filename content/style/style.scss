@@ -1,7 +1,6 @@
 // font collection
 // http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400italic,400,800,600|Merriweather:400,700
 
-// compass stuff
 @import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
 @import "compass/css3/box-shadow";
@@ -18,17 +17,17 @@
 body {
   background: #fff;
   line-height: 1.5;
-  font-size: 1em;
+  font-size: 16px;
   font-family: 'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
   color: #444;
 }
 
 pre, code {
   font-family: monospace;
-  font-size: 15px;
 }
 
 pre {
+  font-size: 0.875em;
   @include border-radius(4px);
   margin-bottom: 1.1em;
   // @include single-box-shadow();
@@ -67,13 +66,11 @@ a {
 #main {
   position: absolute;
 
+  font-size: 1.1em;
+  em { font-weight: bold; }
+
   top: 40px;
   left: 330px;
-
-  p {
-    font-size: 1.1em;
-    em { font-weight: bold; }
-  }
 
   h1 { font-size: 2.369em; }
   h2 { font-size: 1.777em; }
