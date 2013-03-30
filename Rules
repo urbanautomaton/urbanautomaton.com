@@ -24,6 +24,9 @@ compile '/style/*/' do
   filter :sass, Compass.sass_engine_options
 end
 
+compile '/javascript/*/' do
+end
+
 compile '/blog/feed/' do
   filter :erb
 end
@@ -62,6 +65,10 @@ end
 
 route '/style/*/' do
   item.identifier.chop + '.css'
+end
+
+route '/javascript/*/' do
+  item.identifier.chop + '.js'
 end
 
 route '/blog/feed/' do
