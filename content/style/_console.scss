@@ -1,8 +1,11 @@
-$cursor_on: #444;
+$console_bg: transparent;
+$console_fg: #444;
+$cursor_on: $console_fg;
 $cursor_off: transparent;
-$cursor_blurred: #ccc;
 
 #console {
+  background-color: $console_bg;
+  color: $console-fg;
   position: relative;
   width: 700px;
   height: 500px;
@@ -14,7 +17,6 @@ $cursor_blurred: #ccc;
     content: "_";
   }
   .jqconsole-blurred & {
-    color: $cursor_on;
     -webkit-animation: none;
     -moz-animation: none;
     -ms-animation: none;

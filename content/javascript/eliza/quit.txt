@@ -1,0 +1,3 @@
+quit: bye
+quit: goodbye
+quit: quit
