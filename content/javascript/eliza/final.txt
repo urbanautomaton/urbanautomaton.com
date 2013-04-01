@@ -1,1 +1,0 @@
-final: Goodbye.  Thank you for talking to me.

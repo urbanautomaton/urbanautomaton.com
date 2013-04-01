@@ -1,8 +1,0 @@
-synon: belief feel think believe wish
-synon: family mother mom father dad sister brother wife children child
-synon: desire want need
-synon: sad unhappy depressed sick
-synon: happy elated glad better
-synon: cannot can't
-synon: everyone everybody nobody noone
-synon: be am is are was
