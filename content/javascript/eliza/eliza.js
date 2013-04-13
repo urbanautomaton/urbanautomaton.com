@@ -34,9 +34,9 @@ function Eliza (script) {
     var in_terms = input.split(" ");
     var out_terms = this.pipe(in_terms, [this.preSub, this.postSub]);
     return out_terms.join(" ");
-  }
+  };
 
-}
+};
 
 Eliza.prototype.greet = function() {
   return this.script['initial'];
