@@ -12,13 +12,13 @@ More like Greek or Norse gods than the rather ascetic current crop, God
 Objects roam freely through applications, appearing in many forms and
 gleefully coupling with all and sundry.
 
-When your business objects are also your persistence objects, as in
-Rails, this tendency comes with a counterpart: the Table of Plenty.
-If all your behaviour is in one class, it's seductively convenient to
-have all the data it needs sitting right there. Most likely it happens
-incrementally, as each new column on its own doesn't seem to warrant
-a separate entity, but combine to form a table that resists efficient
-querying.
+When your business objects are also your persistence objects, as is very
+ofteni the case in Rails apps, this tendency comes with a counterpart:
+the Table of Plenty. If all your behaviour is in one class, it's
+seductively convenient to have all the data it needs sitting right
+there. Most likely it happens incrementally, as each new column on its
+own doesn't seem to warrant a separate entity, but combine to form a
+table that resists efficient querying.
 
 While this is all very well when you've just got a handful of rows,
 and may indeed speed up your development at first, you'll run into
