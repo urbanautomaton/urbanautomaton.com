@@ -1,13 +1,13 @@
 ---
 kind: article
 title: "Rails Autoloading and the Pit of Despair"
-created_at: 2013-07-24 12:00
+created_at: 2013-08-27 12:00
 comments: true
 draft: false
 categories: [Rails, autoloading, magic]
 ---
 
-Rails is, in part, known and loved for its initial ease of development.
+Rails is, in part, known and loved for its ease of initial development.
 A big part of the "wow!" factor of DHH's famous blog demonstration, its
 conveniences lower the turnaround time between writing code and seeing
 the results in the browser. Two of the key features are:
@@ -17,21 +17,22 @@ the results in the browser. Two of the key features are:
 
 Autoloading means we don't ever have to write `require`, or worry too
 much about load paths; our classes are accessible from anywhere, so we
-can just refer to them directly and they'll appear, as if by magic[^1].
+can just refer to them directly and they'll appear, as if by magic.[^1]
 
 Reloading means we can edit our code and see the results in our browser
-right away, without reloading our server. This means we can iterate much
-more quickly between the browser and editor.
+right away, without reloading our server. This means we can move much
+more quickly between the browser and editor, and comes almost as a free
+side-effect of autoloading - Rails just tracks what is autoloaded, and
+unloads it when a file changes.
 
-## What's the problem?
+## So what's the problem?
 
 I'm not going to address whether these features are good for our
 development practices. I happen to believe they're both harmful, but
 that's another article. Instead I'm going to talk about the significant
 complexity lying behind them, and the problems it can cause.
 
-Before that, though, some background on Ruby's constant lookup and
-built-in autoload.
+Before that, though, some background on Ruby's constant lookup.
 
 ## Ruby Constant Lookup
 
@@ -70,67 +71,31 @@ module A::B
 end
 ```
 
-## Ruby Constant Autoloading
-
-Ruby has a feature called `autoload`[^2], which allows the programmer to
-specify a location at which a named constant is defined, but defer its
-actual loading until the constant is first used. To do this,
-`Module#autoload` is called with the name of the constant, and its file
-location.
-
-We might have the following:
-
-```ruby
-# a.rb
-class A
-  puts "loading A!"
-end
-```
-```
-irb> require 'a'
-Loading A!
-=> true
-```
-```
-irb> autoload :A, 'a'
-=> nil
-irb> A.new
-Loading A!
-=> #<A:0x000001036d9fa8>
-```
-
-In the second example, the output statement is not triggered until the
-`A.new` call; the loading of `a.rb` has been delayed until the first
-reference to `A` was made.
-
-If we want to autoload nested constants, we can do that too, by making
-the `autoload` call with the containing module as the receiver:
-
-```ruby
-module A
-  autoload :B, 'a/b' # Autoload A::B from 'a/b.rb'
-end
-A.autoload :C, 'a/c' # Autoload A::C from 'a/c.rb'
-```
-
-You might use this to improve startup time by delaying expensive loads
-until later, or to declare autoload locations for multiple optional
-adapters, so that only the one that actually gets used is loaded ([Rack
-does this](https://github.com/rack/rack/blob/e6284a3b744fca5373e1119ec37958af5f27f155/lib/rack/handler.rb#L87-L95),
-for example).
+In the first example, because `A` is a member of `Module.nesting`, it
+can be searched for the constant `C`, so as `A::C` exists, it is
+returned. In the second example, `A` is not part of the nesting, so
+`::C` is returned.
 
 ## Rails Constant Autoloading
 
+Ruby has a built-in
+[`autoload`](http://ruby-doc.org/core-2.0/Module.html#method-i-autoload)
+feature[^2], which allows the programmer to specify the file location at
+which a given constant can be found. Ruby will then load that file when
+the constant is first referred to by the program.
+
 Rails, however, autoloads arbitrary constants at runtime - even ones
 whose files didn't exist when the app was started. It can't simply use
-Ruby's built-in `autoload`, because that needs to know both the name of
-each constant and its location up front, and Rails knows neither of
-those things at boot.
+Ruby's built-in `autoload`, because that needs to know both the name and
+file location of each constant up front, and Rails knows neither of
+these things at boot.
 
 Instead, it implements its own autoload system, augmenting Ruby's
 constant lookup with a set set of inference rules specifying which files
-are expected to define a given constant name.  These can be lazily
+are expected to define a given constant name. These can be lazily
 loaded when the constant is first used.
+
+But how does this work?
 
 ### The autoload entry-point
 
@@ -141,11 +106,10 @@ wreaked by its injudicious use).
 
 It has a counterpart for constant lookup,
 [`Module#const_missing`](http://ruby-doc.org/core-2.0/Module.html#method-i-const_missing),
-which is invoked whenever a reference to a constant fails to be
-resolved:
+which is invoked when a reference to a constant fails to be resolved:
 
 ```ruby
-module A
+module Foo
   def self.const_missing(name)
     puts "In #{self} looking for #{name}..."
     super
@@ -153,20 +117,20 @@ module A
 end
 ```
 ```
-> A::B
-"In A looking for B..."
-NameError: uninitialized constant A::B
+> Foo::Bar
+"In Foo looking for Bar..."
+NameError: uninitialized constant Foo::Bar
 ```
 
 When you refer to a constant, Ruby first attempts to find it according
 to its built-in lookup rules, described above. If no matching constant
 can be found, `Module#const_missing` is invoked - in the case of the
-example above, the call is `A.const_missing("B")`.
+example above, the call is `Foo.const_missing("Bar")`.
 
 This is where Rails takes over. Using a file lookup convention and its
-knowledge about which constants have already been loaded, it overrides
-`#const_missing` to load missing constants without the need for explicit
-`require` calls by the programmer.
+knowledge about which constants have already been loaded, Rails
+overrides `#const_missing` to load missing constants without the need
+for explicit `require` calls by the programmer.
 
 ### File Lookup Rules
 
@@ -179,10 +143,11 @@ directories, and constant names are underscored:
 MyModule::SomeClass # => my_module/some_class.rb
 ```
 
-These filenames are then searched for within a number of autoload paths,
-as determined by the `autoload_paths` configuration option. By default,
-Rails searches in all immediate subdirectories of the `app/` directory,
-and additional paths can be added:
+For a given constant, this inferred filename is then searched for within
+a number of autoload paths, as determined by the `autoload_paths`
+configuration option. By default, Rails searches in all immediate
+subdirectories of the `app/` directory, and additional paths can be
+added:
 
 ```ruby
 # config/application.rb
@@ -193,15 +158,15 @@ module MyApp
 end
 ```
 
-So if `autoload_paths` is set to `["app/models", "lib"]`, a constant
-lookup for `User` would look for:
+If `autoload_paths` is set to `["app/models", "lib"]`, a constant lookup
+for a constant `User` would look for:
 
 * `app/models/user.rb`
 * `lib/user.rb`
 
-Rails iterates through these locations, and when one exists, it
-speculatively loads the file. It watches the location of the expected
-new constant, and if it appears after the file is loaded, the algorithm
+Rails checks each of these locations in turn, and when one exists, it
+speculatively loads the file, watching the expected location of the new
+constant. If it appears after the file is loaded, the algorithm
 succeeds. Otherwise, an error is raised that may be familiar:
 
 ```
@@ -217,33 +182,38 @@ depending on the nesting in which the reference was made. How does Rails
 handle this?
 
 The answer is: partially. As `Module#const_missing` passes no nesting
-information to the receiver, Rails must make an assumption. For a
+information to the receiver, Rails does not know the nesting in which
+the reference was made, and it must make an assumption. For any
 reference to a constant `Foo::Bar::Baz`, it assumes the following:
 
 ```ruby
 module Foo
-  class Bar
-    Baz # => Module.nesting = [Foo::Bar, Foo]
+  module Bar
+    Baz # Module.nesting => [Foo::Bar, Foo]
   end
 end
 ```
 
-The above reference to `Baz` will be therefore be treated identically to
-the following:
+In other words, it assumes the maximum nesting possible for a given
+constant reference. The example reference is therefore treated exactly
+the same as the following:
 
 ```ruby
-class Foo::Bar
-  Baz
+module Foo::Bar::Baz # Module.nesting => []
+
+module Foo::Bar
+  Baz # Module.nesting => [Foo::Bar]
 end
 ```
 
-Rails does have some extra information it can use, however. It knows
-that Ruby failed to resolve this particular constant reference using its
-regular lookup, meaning that whatever constant it should refer to cannot
-already be loaded.
+While there's been a significant loss of information, Rails does have
+some extra information it can use. It knows that Ruby failed to resolve
+this particular constant reference using its regular lookup, meaning
+that whatever constant it should refer to cannot already be loaded.
 
-Assuming no constant `Baz` is loaded, Rails will attempt to load the
-following constants in turn, *if they are not already loaded*:
+When `Foo::Bar::Baz` is referred to, then, Rails will attempt to load
+the following constants in turn, until it finds one that is already
+loaded:
 
 * `Foo::Bar::Baz`
 * `Foo::Baz`
@@ -270,9 +240,10 @@ resolve it, and calls `Foo::Bar.const_missing("Baz")`. Rails then:
 2. If a matching file is found, it is speculatively loaded:
   - If the correct constant is defined, success
   - Otherwise, an error is raised
-3. If no matching file is found, look instead for `Foo::Baz`, then
+3. If no matching file is found, it looks instead for `Foo::Baz`, then
    `Baz`, unless they are already defined
-4. If none of the candidate constants can be loaded, raise a `NameError`
+4. If none of the candidate constants can be loaded, it raises a
+   `NameError`
 
 Rails has thus freed us from manually loading our code. It's done so by
 employing several assumptions, however, which come at varying costs.
@@ -281,13 +252,12 @@ Let's take a look.
 ## Rails autoloading pitfalls
 
 For the sake of an already over-long post, I'm going to cover in detail
-just two of the ways Rails autoloading has tripped me up. There are
-more, but I hope these are illustrative of the sort of problems
-autoloading causes.
+just two of the ways Rails autoloading can trip us up. There are more,
+but these are illustrative of the sort of problems autoloading causes.
 
 ### Lost nesting information
 
-We've seen how the nesting in which a constant is referenced determines
+We've seen how the nesting in which a constant is referred to determines
 where it is looked for by Ruby. But we also saw that Rails doesn't
 receive any nesting information, so is forced to guess at the intended
 constant, using an assumed nesting and knowledge of what's already
@@ -340,15 +310,20 @@ I'm in Foo!
 => nil
 ```
 
-Why is this? Well, Rails does not know about the nesting `Qux` was
-referred to from.  It knows only that Ruby has failed to resolve `Qux`
-to any constant. So it first looks for `Foo::Bar::Qux`, which does not
-exist.  It then checks whether a constant `Foo::Qux` is already loaded.
-It is not, so it attempts to load it, and succeeds.
+Why is this?
 
-Our pre-existing knowledge about Ruby constant lookup has thus been
-subverted. But did I just say "the first time around"? I certainly did,
-which leads to our second pitfall:
+Well, Rails doesn't know about the nesting `Qux` was referred to from.
+It knows only that Ruby has failed to resolve `Qux` to any constant. So
+it first looks for `Foo::Bar::Qux`, which does not exist.
+
+It then checks whether a constant `Foo::Qux` is already loaded.  It is
+not, so it attempts to load it, and because `foo/qux.rb` exists and
+defines an apparently-correct constant, it succeeds. Our pre-existing
+knowledge about Ruby constant lookup has thus been subverted - we've
+loaded a constant that the nesting would not normally permit.
+
+But did I just say "the first time around"? I certainly did, which leads
+to our second pitfall:
 
 ### Load order dependence
 
@@ -359,7 +334,7 @@ different constant definitions in two runs of the same code.  Worse
 still, the same constant reference twice in a row can give different
 results.
 
-Let's go back to our last example. What happens if we call `print_qux`
+Let's go back to our last example. What happens if we call `.print_qux`
 twice?
 
 ```
@@ -370,13 +345,13 @@ I'm in Foo!
 NameError: uninitialized constant Foo::Bar::Qux
 ```
 
-This is pretty disastrous. First we've been given the wrong result,
-and then we've been incorrectly told that the constant we referred to
-doesn't exist. What on earth led to this?
+This is disastrous! First we've been given the wrong result, and then
+we've been incorrectly told that the constant we referred to doesn't
+exist. What on earth led to this?
 
 The first time, as before, is down to the loss of nesting information.
-Rails can't know that `Foo::Qux` isn't what we're after, so it happily
-loads it.
+Rails can't know that `Foo::Qux` isn't what we're after, so once it
+realises that `Foo::Bar::Qux` does not exist, it happily loads it.
 
 The *second* time, however, `Foo::Qux` is already loaded. So our
 reference can't have been to that constant, otherwise Ruby would have
@@ -398,104 +373,61 @@ I'm at the root!
 => nil
 ```
 
-A funny thing has happened here. In order to get correct behaviour,
-we've ended up deliberately loading the constant we needed before we
-used it. Isn't this suspiciously close to explicitly loading our
+A funny thing has happened here. In order to get correct behaviour, we
+deliberately loaded the constant we needed before we used it (albeit
+indiretly, by referring to it, rather than loading the file that defined
+it).
+
+But wait; isn't this suspiciously close to explicitly loading our
 dependencies with `require`, the very thing autoloading was supposed to
 save us from?
 
 To be fair, we could also have fixed the issue by fully qualifying all
-of our constant references, i.e. referring to `::Qux` and not `Qux`.
-But this is still costing us our existing intuitions about Ruby's
-behaviour. Moreover, without intimate knowledge of the autoloading
-process, it's extremely hard to deduce that this is necessary, let alone
-why.
+of our constant references, i.e. making sure that within `.print_qux` we
+referred to `::Qux` and not the ambiguous `Qux`. But this still costs us
+our existing intuitions about Ruby's behaviour. Moreover, without
+intimate knowledge of the autoloading process, we would have been hard
+pressed to deduce that this was necessary.
 
-### Production- and development-only bugs
+### Other pitfalls
 
-So far the problems we've seen have been restricted to a purely
-autoloading environment. But Rails varies its autoload behaviour
-depending on environment, and this is a rich source of extremely hard-
-to-replicate bugs.
+These are only a couple of the potential problems. Things get worse in
+the gap between development and production, as in production Rails
+eagerly loads certain paths. This alters the load order, which as we've
+seen has the potential to change the meaning of constant references.
 
-In production, Rails does not lazily load all constants. Instead, there
-are a set of paths from which all files are eagerly loaded. This
-defaults to every subdirectory of the `app/` directory. It does so
-depth-first in lexical order:
-
-```
-- bar.rb
-- foo.rb
-- qux/
-  - bar.rb
-  - foo.rb
-
-# => [bar.rb, foo.rb, qux/bar.rb, qux/foo.rb]
-```
-
-We've already seen how order-dependent loading affected our last
-example, altering the inheritance structure. Now we can see how altering
-the load procedure can have a similar effect. Again, we take a simple
-set of class definitions:
-
-```ruby
-# bar.rb
-class Bar
-end
-
-# foo.rb
-class Foo
-end
-
-# qux/bar.rb
-module Qux
-  class Bar < Foo
-  end
-end
-
-# qux/foo.rb
-module Qux
-  class Foo
-  end
-end
-```
-
-In development mode, it's the same problem as last time: if `::Foo` is
-loaded before `Qux::Bar`, then `Qux::Bar` will inherit from it, instead
-of `Qux::Foo` as you'd normally expect from Ruby's constant lookup
-rules.
-
-Let's assume that we never encountered this problem in development,
-though - we got lucky, and our code always refers to `Qux::Bar` first.
-Then we get to production, and suddenly we see `NoMethodError` cropping
-up.
-
-This is because the loading has changed. Rails eagerly loads all of
-the files in the order shown. When it reaches `qux/bar.rb`, `::Foo` is
-loaded, but `Qux::Foo` is not. So in production, regardless of the order
-in which the constants are referred to, `Qux::Bar` *always* inherits
-from `::Foo`, and all of a sudden we've got a production bug we can't
-replicate locally.
+More potential problems lurk if you reopen class or module definitions -
+again, depending on load order, these could end up treated as the main
+definition, preventing autoloading from finding the "real" definition.
+Again, depending on execution path, you can end up with completely
+different behaviour.
 
 ## Final thoughts
 
-Rails autoloading is supposed to provide simplicity. We're freed from
-thinking about load paths, and where our dependencies come from, and can
-just get on with using the code that we write. Until, that is, we hit
-trouble.
+Rails autoloading is supposed to provide simplicity. Ostensibly, we're
+freed from thinking about load paths and where our dependencies come
+from, and can just get on with using the code that we write. Until, that
+is, we hit trouble.
 
 It's at this point that the trade-off between convenience and complexity
-starts to bite. In all of the examples I've shown above, a decent
-grounding in Ruby's constant lookup is not sufficient to understand the
-problem. We needed a deep understanding of Rails' autoloading system,
-the ways in which it invalidates our existing assumptions, and its
-inherent limitations and compromises. Instead of decreasing, our
-cognitive load has markedly increased.
+starts to bite. In the examples I've shown above, a decent grounding in
+Ruby's constant lookup was not sufficient to understand the problem. We
+needed a deep understanding of Rails' autoloading system to understand
+what was going wrong. Far from providing simplicity, this supposed
+convenience has markedly increased our cognitive load.
 
 So what have we really gained? Certainly, we have to restart our
 development server less often. But we haven't been freed from knowing
-about loading. On the contrary: we've encountered baffling bugs, and
-needed to grapple with a loading system far more complex than normal.
+about loading. On the contrary: we've been forced to face baffling bugs,
+and have had to delve far more deeply into the specifics of code loading
+than we ever did before.
+
+I understand the attraction of autoloading. Code loading is a tedious,
+omnipresent hassle that squats unpleasantly at the base of the learning
+curve of any programming project. As with so many of Rails'
+conveniences, autoloading removes a barrier to entry, and that's to be
+applauded. I just wonder how far up the learning curve it remains a net
+benefit.
 
 ---
 
@@ -506,4 +438,5 @@ needed to grapple with a loading system far more complex than normal.
   his blog](http://myronmars.to/n/dev-blog/2012/12/5-reasons-to-avoid-bundler-require).
 
 [^2]:
-  Although it [will not have it much longer...](https://www.ruby-forum.com/topic/3036681)
+  Although it [may not have it much
+  longer...](https://www.ruby-forum.com/topic/3036681)
