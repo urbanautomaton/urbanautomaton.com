@@ -16,6 +16,14 @@ class HighlitMarkdownFilter < Nanoc::Filter
   end
 
   def renderer(options={})
-    Redcarpet::Markdown.new(HighlitHTML, options.merge(:fenced_code_blocks => true))
+    opts = default_options.merge(options)
+    Redcarpet::Markdown.new(HighlitHTML, opts)
+  end
+
+  def default_options
+    {
+      :fenced_code_blocks => true,
+      :footnotes          => true,
+    }
   end
 end
