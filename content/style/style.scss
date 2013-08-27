@@ -29,7 +29,9 @@ pre {
   font-size: 0.875em;
   @include border-radius(4px);
   margin-bottom: 1.1em;
-  // @include single-box-shadow();
+  &.highlight {
+    @include single-box-shadow($default-box-shadow-color, 3px, 3px, 10px);
+  }
   & + p {
     margin-top: 1.5em;
   }
