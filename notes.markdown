@@ -1,4 +1,53 @@
-# Random shit
+# Notes
+
+## Outline
+
+1. Introduction
+  - Who am I?
+  - What's this talk about?
+    * Informed by my experience introducing Chef in stages in a small
+      team with no dedicated ops people
+    * Hoped I could speed things up for other small teams following the
+      same route
+    * Murray went Steve Ballmer on me - developers! developers!
+      developers!
+    * So as well as the above, I'm going to try to explain why we as
+      developers should be excited about configuration management
+  - Who is it aimed at?
+    * Small teams with hand-configured servers looking to move up
+    * Individual devs looking to gain a better understanding of their
+      environment
+    * Seen many talks by ops guys selling devops to devs - I'm going to
+      try the other way around.
+2. Quick Chef overview
+  - What is it?
+    * Configuration management system, duh
+    * Wut?
+    * Tool for comparing a system's current state to a desired state,
+      and taking it from the former to the latter ("converging")
+  - Basics - resources, attributes, convergence
+  - Chef solo vs. Chef server
+3. What is it to developers?
+  - Better understanding of our systems
+  - More production-like development environments
+  - Ownership of how our code runs when it's live
+  - Playing with virtual machines is REALLY COOL
+  - Ops is like programming - really?
+    * Is it more than fancy scripting?
+    * Identifying abstractions
+    * Testing!
+  - ENOUGH KOOL-AID - Can I set up my laptop with this nonsense?
+4. Tools, tips and tricks
+  - Pick your platform - Chef should make migration easier, so commit.
+  - Virtualisation! Specifically vagrant. Miraculous.
+  - Dependency management: berkshelf, librarian
+  - Packages: build them yourself with fpm!
+5. Conclusions
+  - Does Chef live up to its promises?
+    * Abstractions: low-level good, higher-level, er...
+    * Convergence: configuration drift, confidence in later runs
+  - If it doesn't quite, should we still use it?
+  - Who *shouldn't* use it?
 
 ## Levels of ops
 
