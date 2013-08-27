@@ -7,7 +7,7 @@ draft: true
 categories: 
 ---
 
-If I were to describe my hair preferences, they would be "desultorily
+If I were to describe my hair preferences, they would be "lazily
 barbarous". My brother Esau is an hairy man, and I am also an hairy man,
 because I can't be buggered to shave.
 
@@ -22,7 +22,7 @@ culprit is magic. Yes, magic has delivered us not unicorns, but fuck-off
 great big bovines in need of a hot towel and a straight-edge razor.
 
 If I may illustrate this by goring the ox that feeds me, I would like to
-pick on two tools I use daily: Rails and Bundler. Ladies first:
+pick on two tools I use daily: Rails and Bundler.
 
 ### Bundler
 

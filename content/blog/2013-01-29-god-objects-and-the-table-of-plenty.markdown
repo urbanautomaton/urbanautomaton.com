@@ -2,6 +2,7 @@
 kind: article
 title: "God Objects and the Table of Plenty"
 created_at: 2013-01-29 15:37
+draft: true
 comments: true
 author: "Simon Coffey"
 categories: [Rails, Partitioning, ActiveRecord, Performance]

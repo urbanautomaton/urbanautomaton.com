@@ -3,6 +3,7 @@ kind: article
 title: "Chef for the easily intimidated"
 created_at: 2013-06-16 15:37
 comments: true
+draft: true
 author: "Simon Coffey"
 categories: [Devops, Chef, Configuration Management]
 ---
