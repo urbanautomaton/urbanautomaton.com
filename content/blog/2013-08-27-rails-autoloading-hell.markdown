@@ -1,6 +1,6 @@
 ---
 kind: article
-title: "Rails Autoloading and the Pit of Despair"
+title: "Rails autoloading &#8212; how it works, and when it doesn't"
 created_at: 2013-08-27 12:00
 comments: true
 draft: false
@@ -46,8 +46,8 @@ given lexical scope, that constant is searched for in:
    a module.
 
 Loosely speaking, the search first works upwards through the nesting at
-the point of reference, then upwards through the inheritance chain of
-either the containing class (if there is one), or that of `Object`
+the point of reference, then upwards through either the inheritance
+chain of the containing class (if there is one), or that of `Object`
 otherwise.
 
 A good set of examples and a thorough explanation can be found [at
@@ -187,7 +187,7 @@ resolve to a number of different constant definitions, which vary
 depending on the nesting in which the reference was made. How does Rails
 handle this?
 
-The answer is: partially. As `Module#const_missing` passes no nesting
+The answer is, "partially". As `Module#const_missing` passes no nesting
 information to the receiver, Rails does not know the nesting in which
 the reference was made, and it must make an assumption. For any
 reference to a constant `Foo::Bar::Baz`, it assumes the following:
@@ -215,7 +215,7 @@ end
 While there's been a significant loss of information, Rails does have
 some extra information it can use. It knows that Ruby failed to resolve
 this particular constant reference using its regular lookup, meaning
-that whatever constant it should refer to cannot already be loaded.
+that whatever constant it should refer to cannot be already loaded.
 
 When `Foo::Bar::Baz` is referred to, then, Rails will attempt to load
 the following constants in turn, until it finds one that is already
