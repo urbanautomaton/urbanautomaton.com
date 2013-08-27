@@ -22,8 +22,7 @@ can just refer to them directly and they'll appear, as if by magic.[^1]
 Reloading means we can edit our code and see the results in our browser
 right away, without reloading our server. This means we can move much
 more quickly between the browser and editor, and comes almost as a free
-side-effect of autoloading - Rails just tracks what is autoloaded, and
-unloads it when a file changes.
+side-effect of autoloading[^2].
 
 ## So what's the problem?
 
@@ -45,6 +44,11 @@ given lexical scope, that constant is searched for in:
 2. Each entry in `Module.nesting.first.ancestors`
 3. Each entry in `Object.ancestors` if `Module.nesting.first` is nil or
    a module.
+
+Loosely speaking, the search first works upwards through the nesting at
+the point of reference, then upwards through the inheritance chain of
+either the containing class (if there is one), or that of `Object`
+otherwise.
 
 A good set of examples and a thorough explanation can be found [at
 Conrad Irwin's blog](http://cirw.in/blog/constant-lookup.html) - for our
@@ -76,11 +80,13 @@ can be searched for the constant `C`, so as `A::C` exists, it is
 returned. In the second example, `A` is not part of the nesting, so
 `::C` is returned.
 
+Loins suitably girded, let's move on to the main topic:
+
 ## Rails Constant Autoloading
 
 Ruby has a built-in
 [`autoload`](http://ruby-doc.org/core-2.0/Module.html#method-i-autoload)
-feature[^2], which allows the programmer to specify the file location at
+feature[^3], which allows the programmer to specify the file location at
 which a given constant can be found. Ruby will then load that file when
 the constant is first referred to by the program.
 
@@ -399,7 +405,7 @@ seen has the potential to change the meaning of constant references.
 More potential problems lurk if you reopen class or module definitions -
 again, depending on load order, these could end up treated as the main
 definition, preventing autoloading from finding the "real" definition.
-Again, depending on execution path, you can end up with completely
+And again, depending on execution path, you can end up with completely
 different behaviour.
 
 ## Final thoughts
@@ -420,14 +426,13 @@ So what have we really gained? Certainly, we have to restart our
 development server less often. But we haven't been freed from knowing
 about loading. On the contrary: we've been forced to face baffling bugs,
 and have had to delve far more deeply into the specifics of code loading
-than we ever did before.
+than we ever did before. Perhaps, because we always had autoloading as a
+crutch, our existing knowledge has atrophied -- or never even developed
+-- putting us at an even greater disadvantage.
 
-I understand the attraction of autoloading. Code loading is a tedious,
-omnipresent hassle that squats unpleasantly at the base of the learning
-curve of any programming project. As with so many of Rails'
-conveniences, autoloading removes a barrier to entry, and that's to be
-applauded. I just wonder how far up the learning curve it remains a net
-benefit.
+As with so many of Rails' conveniences, autoloading removes a barrier to
+entry, and that's a worthy goal. The more I wrestle with it, though, the
+more I think it's something I'd prefer to avoid.
 
 ---
 
@@ -438,5 +443,11 @@ benefit.
   his blog](http://myronmars.to/n/dev-blog/2012/12/5-reasons-to-avoid-bundler-require).
 
 [^2]:
+  Autoloading tracks what is autoloaded as part of its basic operation.
+  All reloading then requires is to keep an eye on changes to the
+  filesystem, and unload everything if a file has been written to.
+  Autoloading then just reloads it all.
+
+[^3]:
   Although it [may not have it much
   longer...](https://www.ruby-forum.com/topic/3036681)
