@@ -6,6 +6,10 @@ def published_articles
   sorted_articles.reject{|a| a[:draft]}
 end
 
+def draft_articles
+  sorted_articles.select{|a| a[:draft]}
+end
+
 def blog_route(item)
   item.identifier.gsub(
     /(\d{4})-(\d{2})-(\d{2})-/,

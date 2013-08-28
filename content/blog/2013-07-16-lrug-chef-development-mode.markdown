@@ -34,8 +34,8 @@ All of which are detrimental to our code and products. Instead of
 abusing development mode and hammering F5, we should be writing
 acceptance tests where possible, and working from the external
 requirements of our software *inwards*, so that we can be confident the
-code we're writing satisfies a genuine need, and is not just some thing
-we think might be useful later.
+code we're writing satisfies a genuine need, and is not just a thing we
+think might be useful later.
 
 ## Development mode lies to you
 
@@ -46,13 +46,15 @@ reasons:
 1. Convenience misfeatures (hello, lazy auto-loading!)
 2. Ad-hoc dependency configurations
 
-It's the latter point to which Chef pertains. I laboured this point a
+I've covered the former in an [earlier
+post](http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell/)
+- it's the latter point to which Chef pertains. I laboured this point a
 bit in my talk, but it bears repeating: our software dependencies have a
 potentially enormous effect on the meaning of our code.
 
 By way of example, the following simple line in `/etc/my.cnf` is the
 difference between MySQL silently truncating over-long strings, and
-raising an error, almost as if it were an actual RDBMS:
+raising an error as if it were an actual RDBMS:
 
 ```
 sql_mode = 'STRICT_TRANS_TABLES'
@@ -87,7 +89,7 @@ servers, running locally with:
 2. A fully-deployable production-like web stack
 
 Once you've got your app's server roles sorted out in Chef and
-you're comfortable with Vagrant, this is a 10-minute job. You might
+you're comfortable with Vagrant, this is a 10-minute job.[^1] You might
 create a node definition like so:
 
 ```javascript
@@ -131,3 +133,9 @@ your tests are insufficiently expressive. The pain encourages you write
 decoupled code, or lean on automation to verify your code's behaviour.
 
 Feel the good pain, and let it make you a better programmer.
+
+---
+
+[^1]:
+  I am aware that this is akin to saying "once you've subdued the
+  leopard, it's really not very dangerous."

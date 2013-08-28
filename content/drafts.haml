@@ -1,0 +1,12 @@
+---
+title: blog drafts
+---
+
+:markdown
+  Draft blog posts. Not to be linked to!
+
+%ul
+  - draft_articles.each do |article|
+    %li
+      %a{ :href => article.path }= article[:title]
+
