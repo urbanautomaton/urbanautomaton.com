@@ -381,8 +381,8 @@ I'm at the root!
 
 A funny thing has happened here. In order to get correct behaviour, we
 deliberately loaded the constant we needed before we used it (albeit
-indiretly, by referring to it, rather than loading the file that defined
-it).
+indirectly, by referring to it, rather than loading the file that
+defined it).
 
 But wait; isn't this suspiciously close to explicitly loading our
 dependencies with `require`, the very thing autoloading was supposed to
