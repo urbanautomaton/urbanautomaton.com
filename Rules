@@ -47,9 +47,7 @@ compile '/' do
 end
 
 compile '*' do
-  if item.binary?
-    # don’t filter binary items
-  else
+  unless item.binary?
     filter :erb
     layout 'default'
   end
@@ -69,6 +67,7 @@ end
 
 route '/javascript/*/' do
   item.identifier.chop + '.js'
+  nil
 end
 
 route '/blog/feed/' do
