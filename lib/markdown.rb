@@ -8,7 +8,7 @@ class HighlitHTML < Redcarpet::Render::HTML
 end
 
 class HighlitMarkdownFilter < Nanoc::Filter
-  identifier :highlit_markdown
+  identifier :markdown
   type :text
 
   def run(content, options={})

@@ -32,7 +32,7 @@ compile '/blog/feed/' do
 end
 
 compile '/blog/*/' do
-  filter :highlit_markdown
+  filter :markdown
   layout 'default'
 end
 
@@ -41,14 +41,9 @@ compile '/blog/' do
   layout 'default'
 end
 
-compile '/' do
-  filter :haml
-  layout 'default'
-end
-
 compile '*' do
   unless item.binary?
-    filter :haml
+    filter item[:extension].to_sym
     layout 'default'
   end
 end
