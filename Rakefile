@@ -3,7 +3,7 @@ CLEAN.include("output/**")
 
 require 'open3'
 
-task(:default => [:compile])
+task(:default => [:clean, :compile])
 
 task(:compile) do
   output = `nanoc compile 2>&1`
@@ -11,15 +11,15 @@ task(:compile) do
   raise RuntimeError unless $?.success?
 end
 
-task(:deploy => [:compile]) do
+task(:deploy) do
   timestamp = Time.now.getutc.strftime("%Y-%m-%d %H:%M:%S UTC")
-  output = `cd output && git add -A . && git commit -m "Site updated at #{timestamp}" && git push 2>&1`
+  output = `cd output && git add -A . 2>&1 && git commit -m "Site updated at #{timestamp}" 2>&1 && git push 2>&1`
   print output
   raise RuntimeError unless $?.success?
 end
 
 task(:new_post) do
-  raise ArgumentError, "You must give a post title" unless ENV["TITLE"]
+  raise ArgumentError, "You must give a post title (rake new_post TITLE='something')" unless ENV["TITLE"]
 
   title     = ENV["TITLE"]
   slug_base = title.downcase.gsub(/[^[:alpha:]\d ]/, "").squeeze(" ").gsub(/ /, "-")[0..50]
