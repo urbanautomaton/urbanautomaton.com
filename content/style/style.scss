@@ -89,20 +89,19 @@ a {
       margin-top: 0.25em;
       margin-bottom: 0.25em;
     }
+    li {
+      margin-bottom: 0.125em;
+    }
   }
 
   ul {
     list-style: disc outside;
     margin-left: 1.25em;
-    // padding-left: 1em;
-    // text-indent: -1em;
   }
 
   ol {
     list-style: decimal outside;
     margin-left: 1.5em;
-    // padding-left: 1.25em;
-    // text-indent: -1.25em;
   }
 
   sup {
