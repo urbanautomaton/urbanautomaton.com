@@ -13,7 +13,7 @@ end
 
 task(:deploy => [:compile]) do
   timestamp = Time.now.getutc.strftime("%Y-%m-%d %H:%M:%S UTC")
-  output = `cd output && git add . && git commit -m "Site updated at #{timestamp}" && git push 2>&1`
+  output = `cd output && git add -A . && git commit -m "Site updated at #{timestamp}" && git push 2>&1`
   print output
   raise RuntimeError unless $?.success?
 end

@@ -124,7 +124,7 @@ end
 ```
 ```
 > Foo::Bar
-"In Foo looking for Bar..."
+In Foo looking for Bar...
 NameError: uninitialized constant Foo::Bar
 ```
 

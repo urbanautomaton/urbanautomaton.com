@@ -11,12 +11,13 @@ def draft_articles
 end
 
 def blog_route(item)
-  item.identifier.gsub(
-    /(\d{4})-(\d{2})-(\d{2})-/,
-    publish_date(item).strftime("%Y/%m/%d/")
-  )
+  item.identifier.gsub(/\d{3}-/, publish_date(item))
+end
+
+def draft_route(item)
+  "/drafts" + item.identifier.gsub(/blog\//, "")
 end
 
 def publish_date(item)
-  DateTime.parse(item[:publish_at] || item[:created_at])
+  DateTime.parse(item[:publish_at] || item[:created_at]).strftime("%Y/%m/%d/")
 end
