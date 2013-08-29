@@ -205,7 +205,7 @@ constant reference. The example reference is therefore treated exactly
 the same as the following:
 
 ```ruby
-module Foo::Bar::Baz # Module.nesting => []
+Foo::Bar::Baz # Module.nesting => []
 
 module Foo::Bar
   Baz # Module.nesting => [Foo::Bar]
