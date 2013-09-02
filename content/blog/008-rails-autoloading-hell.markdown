@@ -24,7 +24,7 @@ right away, without reloading our server. This means we can move much
 more quickly between the browser and editor, and comes almost as a free
 side-effect of autoloading[^2].
 
-## So what's the problem?
+### So what's the problem?
 
 I'm not going to address whether these features are good for our
 development practices. I happen to believe they're both harmful, but
@@ -244,7 +244,7 @@ resolve it, and calls `Foo::Bar.const_missing("Baz")`. Rails then:
 
 1. Looks within `autoload_paths` for `foo/bar/baz.rb`
 2. If a matching file is found, it is speculatively loaded:
-  - If the correct constant is defined, success
+  - If the correct constant is defined, it is returned
   - Otherwise, an error is raised
 3. If no matching file is found, it looks instead for `Foo::Baz`, then
    `Baz`, unless they are already defined

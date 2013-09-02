@@ -24,15 +24,15 @@ gave at Railsberry in 2012. I highly recommend watching it if you
 haven't seen it already.
 
 If I can brutalise his main argument for the sake of brevity, however,
-it is that development mode encourages:
+it is that the convenience of development mode encourages the following,
+all detrimental to our code and products:
 
 1. Cowboy programming
 2. Testless programming
 3. Inside-out programming
 
-All of which are detrimental to our code and products. Instead of
-abusing development mode and hammering F5, we should be writing
-acceptance tests where possible, and working from the external
+Instead of abusing development mode and hammering F5, we should be
+writing acceptance tests where possible, and working from the external
 requirements of our software *inwards*, so that we can be confident the
 code we're writing satisfies a genuine need, and is not just a thing we
 think might be useful later.
@@ -43,7 +43,7 @@ As well as encouraging bad practice, however, development mode is a rich
 source of production-only (or development-only) bugs, for two main
 reasons:
 
-1. Convenience misfeatures (hello, lazy auto-loading!)
+1. Convenience misfeatures (hello, lazy autoloading!)
 2. Ad-hoc dependency configurations
 
 I've covered the former in an [earlier
