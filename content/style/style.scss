@@ -6,82 +6,34 @@
 @import "compass/reset";
 
 @import "fonts";
+@import "base";
+@import "sidebar";
 @import "solarized";
 @import "console";
-
-* {
-  @include box-sizing(border-box);
-}
-
-body {
-  background: #fff;
-  line-height: 1.5;
-  font-size: 16px;
-  font-family: 'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
-  color: #444;
-}
-
-pre, code {
-  font-family: monospace;
-}
-
-pre {
-  font-size: 0.875em;
-  @include border-radius(4px);
-  margin-bottom: 1.1em;
-  &.highlight {
-    @include single-box-shadow($default-box-shadow-color, 3px, 3px, 10px);
-  }
-  & + p {
-    margin-top: 1.5em;
-  }
-}
-
-h1, h2, h3, h4, h5 {
-  color: #222;
-  font-weight: bold;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-}
-
-h1 {
-  line-height: 1.1;
-  margin-top: 1em;
-  margin-bottom: 1.1em;
-}
-
-h2, h3, h4, h5 {
-  line-height: 1.1;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-h2 {
-  margin-bottom: 0.75em;
-}
-
-p {
-  margin-bottom: 1.1em;
-}
-
-a {
-  text-decoration: none;
-}
-
 
 #main {
   position: absolute;
 
-  font-size: 1.1em;
-  em { font-weight: bold; }
+  font-size:    1.1em;
+  line-height:  1.5;
 
-  top: 40px;
-  left: 330px;
+  top:   40px;
+  left:  330px;
 
-  h1 { font-size: 2.369em; }
-  h2 { font-size: 1.777em; }
-  h3 { font-size: 1.333em; }
-  h4 { font-size: 1em;     }
-  h5 { font-size: 0.75em;  }
+  h1 {
+    margin-top:     1em;
+    margin-bottom:  1.1em;
+  }
+
+  h2, h3, h4, h5 { margin-top:     1.5em;  }
+  h2             { margin-bottom:  0.75em; }
+  h3, h4, h5     { margin-bottom:  0.5em;  }
+
+  h1 { font-size: pow($header-size-ratio, 3);  }
+  h2 { font-size: pow($header-size-ratio, 2);  }
+  h3 { font-size: pow($header-size-ratio, 1);  }
+  h4 { font-size: 1em;                         }
+  h5 { font-size: pow($header-size-ratio, -1); }
 
   ul, ol {
     margin-bottom: 1.1em;
@@ -110,39 +62,10 @@ a {
   }
 
   width: 700px;
+
   h1, h2, h3, h4, h5, p, ul, ol {
     width: 600px;
   }
-  pre {
-    // width: 100%;
-    margin-left: 1.5em;
-  }
-}
 
-#sidebar {
-  position: absolute;
-
-  top: 40px;
-  left: 20px;
-  width: 250px;
-
-  padding: 20px 20px 20px 0;
-
-  border-right: 1px solid #ccc;
-
-  text-align: right;
-
-  .nav {
-    li {
-      font-size: 1.25em;
-      letter-spacing: 0.5px;
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-      &.active {
-        // font-weight: bold;
-        list-style: disc inside;
-      }
-    }
-    a { color: #222; }
-  }
 }
 
