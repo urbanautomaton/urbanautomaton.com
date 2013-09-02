@@ -1,3 +1,10 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/box-sizing";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "compass/css3/opacity";
+@import "compass/reset";
+
 $background : #fff;
 
 $body-font-family:  'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
@@ -6,15 +13,14 @@ $body-text-size:    16px;
 
 $header-font-family:  'Open Sans', Helvetica, Arial, sans-serif;
 $header-text-color:   #222;
-$header-size-ratio:   1.33333333em;
 
 $code-font-family:  Monaco, Consolas, monospace;
-$code-pre-size: 0.875em;
+$code-inline-size:  0.925em;
+$code-pre-size:     0.825em;
 
 * {
   @include box-sizing(border-box);
 }
-
 
 body {
   background:   $background;
@@ -24,30 +30,14 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  line-height:  1.1;
   color:        $header-text-color;
-  font-weight:  bold;
   font-family:  $header-font-family;
+  font-weight:  bold;
 }
 
-pre, code {
-  font-family:  $code-font-family;
-}
-
-pre {
-  @include        border-radius(4px);
-  font-size:      $code-pre-size;
-  margin-left: 1.5em;
-  margin-bottom:  1.1em;
-  &.highlight {
-    @include single-box-shadow($default-box-shadow-color, 3px, 3px, 10px);
-  }
-  & + p {
-    margin-top: 1.5em;
-  }
-}
-
-p { margin-bottom: 1.1em; }
+pre, code { font-family:  $code-font-family; }
+code      { font-size:    $code-inline-size; }
+pre       { font-size:    $code-pre-size;    }
 
 a { text-decoration: none; }
 
