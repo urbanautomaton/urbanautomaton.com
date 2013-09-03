@@ -1,0 +1,21 @@
+@import "base";
+@import "text";
+@import "fonts";
+@import "sidebar";
+@import "solarized";
+@import "console";
+
+#main {
+  position: absolute;
+  top:   40px;
+  left:  330px;
+}
+
+.blog-text {
+  pre.highlight {
+    @include border-radius(4px);
+    @include single-box-shadow($default-box-shadow-color, .25em, .25em, .75em);
+    // Margin-bottom should match line-height but adjust for shadow
+    margin-bottom:  $typeup-lineHeight + .75em;
+  }
+}

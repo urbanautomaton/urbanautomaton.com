@@ -1,0 +1,16 @@
+@import "base";
+@import "text";
+@import "fonts";
+@import "console";
+
+#sidebar {
+  display: none;
+}
+
+.blog-text {
+  // margin: 2em 1em;
+  pre.highlight {
+    @include border-radius(4px);
+    border: 1px solid $body-text-color;
+  }
+}
