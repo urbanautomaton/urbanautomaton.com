@@ -7,20 +7,26 @@
       = @item[:title]
     %link{ :rel => "stylesheet", :href => "/style/screen.css", :media => "screen" }
     %link{ :rel => "stylesheet", :href => "/style/print.css",  :media => "print" }
+    /[if !IE]
+      %link{ :rel => "stylesheet", :href => "/style/fonts.css" }
+    /[if IE]
+      %link{ :rel => "stylesheet", :href => "/style/fonts.css" }
     %link{ :rel => "alternate", :href => "/atom.xml", :type => "application/atom+xml", :title => "urbanautomaton.com" }
     %meta{ :name => "generator", :content => "nanoc #{Nanoc::VERSION}" }
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
   %body
-    #main.blog-text
-      %h1= @item[:title]
-      = yield
-      - if @item[:comments]
-        = render('snippets/disqus')
-    #sidebar
-      %ul.nav
-        - site_sections(@item).each do |label, link, li_class|
-          %li{ :class => "site-section #{li_class}" }
-            %a{ :href => link }= label
-        - external_links.each do |label, link|
-          %li.external-link
-            %a{ :href => link }= label
+    #main
+      #sidebar
+        %ul.nav
+          - site_sections(@item).each do |label, link, li_class|
+            %li{ :class => "site-section #{li_class}" }
+              %a{ :href => link }= label
+          - external_links.each do |label, link|
+            %li.external-link
+              %a{ :href => link }= label
+      #content.blog-text
+        %h1= @item[:title]
+        = yield
+        - if @item[:comments]
+          = render('snippets/disqus')
     = render('snippets/google_analytics')

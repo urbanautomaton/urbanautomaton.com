@@ -8,12 +8,13 @@ $startModularScaleAt: 3;
 @import "typeup";
 
 .blog-text {
+  padding: 2em;
 
-  @include typeup-container(1.1em, 35em, 1);
+  @include typeup-container(1.1em, 700px, 1);
 
   pre {
-    line-height:    1.5em;
-    padding:        0.875em;
+    line-height:  1.5em;
+    padding:      0.875em;
   }
 
   ul, ol {

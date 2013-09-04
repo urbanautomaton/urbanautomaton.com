@@ -1,24 +1,16 @@
 #sidebar {
-  position:  absolute;
-  top:       40px;
-  left:      20px;
-  width:     250px;
-
-  padding:       20px 20px 20px 0;
-  border-right:  1px solid #ccc;
-
-  text-align:   right;
-
+  padding: 2em;
   .nav {
     li {
+      padding: 3px 5px;
       line-height:     1.5em;
       font-size:       1.25em;
       letter-spacing:  0.5px;
       font-family:     $header-font-family;
-      &.active {
-        list-style: disc inside;
-      }
+      &.active { background: #bbb; }
     }
+
     a { color: #222; }
   }
+
 }

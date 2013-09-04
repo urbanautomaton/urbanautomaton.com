@@ -6,16 +6,34 @@
 @import "console";
 
 #main {
-  position: absolute;
-  top:   40px;
-  left:  330px;
+  position:    relative;
+  display:     inline-block;
+}
+
+#content {
+  @include respond-to(wide-screens)  { margin-left: 200px; }
+  @include respond-to(small-screens) { width: 100%;        }
+}
+
+#sidebar {
+  @include respond-to(wide-screens) {
+    width:       200px;
+    text-align:  right;
+    position: fixed;
+  }
+
+  li {
+    @include respond-to(medium-screens) { display: inline-block; }
+    @include respond-to(small-screens) { display: inline-block; }
+  }
+
 }
 
 .blog-text {
   pre.highlight {
+    // Shade and adjust margins to compensate
     @include border-radius(4px);
     @include single-box-shadow($default-box-shadow-color, .25em, .25em, .75em);
-    // Margin-bottom should match line-height but adjust for shadow
-    margin-bottom:  $typeup-lineHeight + .75em;
+    margin-bottom: $typeup-lineHeight + .75em;
   }
 }
