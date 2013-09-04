@@ -20,13 +20,12 @@
     width:       200px;
     text-align:  right;
     position: fixed;
-  }
 
-  li {
-    @include respond-to(medium-screens) { display: inline-block; }
-    @include respond-to(small-screens) { display: inline-block; }
+    li {
+      float: right;
+      clear: both;
+    }
   }
-
 }
 
 .blog-text {
