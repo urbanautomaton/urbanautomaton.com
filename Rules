@@ -65,7 +65,6 @@ end
 
 route '/javascript/*/' do
   item.identifier.chop + '.js'
-  nil
 end
 
 route '/files/*/' do

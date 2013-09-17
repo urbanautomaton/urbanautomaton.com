@@ -1,15 +1,27 @@
 $(function () {
-  var startEliza = function(jqconsole) {
-    var eliza = new Eliza(eliza_script);
-    jqconsole.Write(eliza.greet() + '\n');
-    waitRespond(jqconsole, eliza);
+  var Client = function(jqconsole) {
+    this.finished = false;
+
+    this.say = function(phrase) {
+      jqconsole.Write((phrase + '\n').toUpperCase(), 'jqconsole-output');
+    };
+
+    this.quit = function() {
+      this.finished = true;
+    };
   };
 
-  var waitRespond = function (jqconsole, eliza) {
+  var startEliza = function(jqconsole) {
+    var client = new Client(jqconsole);
+    var eliza = new Eliza(client, eliza_script);
+    waitRespond(jqconsole, eliza, client);
+  };
+
+  var waitRespond = function (jqconsole, eliza, client) {
     jqconsole.Prompt(true, function (input) {
-      jqconsole.Write(eliza.respondTo(input) + '\n', 'jqconsole-output');
-      if (!eliza.finished) {
-        waitRespond(jqconsole, eliza);
+      eliza.say(input)
+      if (!client.finished) {
+        waitRespond(jqconsole, eliza, client);
       } else {
         window.setTimeout(
           function(){

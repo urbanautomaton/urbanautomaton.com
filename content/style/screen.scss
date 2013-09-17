@@ -12,7 +12,7 @@
 
 #content {
   @include respond-to(wide-screens)  { margin-left: 200px; }
-  @include respond-to(small-screens) { width: 100%;        }
+  // @include respond-to(small-screens) { width: 100%;        }
 }
 
 #sidebar {
