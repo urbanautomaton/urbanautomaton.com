@@ -3,14 +3,19 @@ CLEAN.include("output/**")
 
 require 'open3'
 
-task(:default => [:clean, :compile])
+task(:default => [:rebuild])
 
+desc("Clean output and recompile")
+task(:rebuild => [:clean, :compile])
+
+desc("Recompile output")
 task(:compile) do
   output = `nanoc compile 2>&1`
   print output
   raise RuntimeError unless $?.success?
 end
 
+desc("Deploy current output directory to GH Pages")
 task(:deploy) do
   timestamp = Time.now.getutc.strftime("%Y-%m-%d %H:%M:%S UTC")
   output = `cd output && git add -A . 2>&1 && git commit -m "Site updated at #{timestamp}" 2>&1 && git push 2>&1`
@@ -18,6 +23,7 @@ task(:deploy) do
   raise RuntimeError unless $?.success?
 end
 
+desc("New blog post - requires TITLE env variable")
 task(:new_post) do
   raise ArgumentError, "You must give a post title (rake new_post TITLE='something')" unless ENV["TITLE"]
 
