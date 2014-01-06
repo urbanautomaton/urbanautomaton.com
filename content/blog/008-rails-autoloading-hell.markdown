@@ -97,7 +97,7 @@ file location of each constant up front, and Rails knows neither of
 these things at boot.
 
 Instead, it implements its own autoload system, augmenting Ruby's
-constant lookup with a set set of inference rules specifying which files
+constant lookup with a set of inference rules specifying which files
 are expected to define a given constant name. These can be lazily
 loaded when the constant is first used.
 
