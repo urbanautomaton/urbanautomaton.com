@@ -5,34 +5,31 @@
 @import "solarized";
 @import "console";
 
-#main {
-  position:    relative;
-  display:     inline-block;
-}
-
-#content {
-  @include respond-to(wide-screens)  { margin-left: 200px; }
-  // @include respond-to(small-screens) { width: 100%;        }
-}
-
-#sidebar {
-  @include respond-to(wide-screens) {
-    width:       200px;
-    text-align:  right;
-    position: fixed;
-
-    li {
-      float: right;
-      clear: both;
-    }
+body {
+  @include respond-to(small-screens) {
+    font-size: 0.6em;
   }
 }
 
+#sidebar {
+  width: 100%;
+}
+
 .blog-text {
+  @include respond-to(small-screens) {
+    width: 100%;
+    // display: inline-block;
+  }
   pre.highlight {
     // Shade and adjust margins to compensate
+    // display: inline-block;
     @include border-radius(4px);
     @include single-box-shadow($default-box-shadow-color, .25em, .25em, .75em);
     margin-bottom: $typeup-lineHeight + .75em;
+  }
+  code {
+    @include border-radius(3px);
+    border: 2px solid $code-inline-bg;
+    background-color: $code-inline-bg;
   }
 }

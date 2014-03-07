@@ -9,7 +9,7 @@ $background : #fff;
 
 $body-font-family:  'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
 $body-text-color:   #444;
-$body-text-size:    16px;
+$body-text-size:    1em;
 
 $header-font-family:  'Open Sans', Helvetica, Arial, sans-serif;
 $header-text-color:   #222;
@@ -17,20 +17,17 @@ $header-text-color:   #222;
 $code-font-family:  Monaco, Consolas, monospace;
 $code-inline-size:  0.95em;
 $code-pre-size:     0.825em;
+$code-inline-bg:    #f4f4f4;
 
-$break-small: 700px;
-$break-large: 900px;
+$break: 700px;
 
 // usage: @include respond-to(small-screens) { [some_rules] }
 @mixin respond-to($media) {
   @if $media == small-screens {
-    @media only screen and (max-width: $break-small) { @content; }
-  }
-  @else if $media == medium-screens {
-    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+    @media only screen and (max-width: $break) { @content; }
   }
   @else if $media == wide-screens {
-    @media only screen and (min-width: $break-large) { @content; }
+    @media only screen and (min-width: $break + 1) { @content; }
   }
 }
 
@@ -58,4 +55,3 @@ pre       { font-size:    $code-pre-size;    }
 a { text-decoration: none; }
 
 em { font-weight: bold; }
-
