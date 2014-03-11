@@ -9,6 +9,22 @@ body {
   @include respond-to(small-screens) {
     font-size: 0.6em;
   }
+  @include respond-to(medium-screens) {
+    font-size: 0.8em;
+  }
+}
+
+#main {
+  @include respond-to(small-screens) {
+    width: 100%;
+  }
+  @include respond-to(medium-screens) {
+    width: 100%;
+  }
+  @include respond-to(wide-screens) {
+    width: 700px;
+    margin: auto;
+  }
 }
 
 #sidebar {
@@ -18,7 +34,9 @@ body {
 .blog-text {
   @include respond-to(small-screens) {
     width: 100%;
-    // display: inline-block;
+  }
+  @include respond-to(medium-screens) {
+    width: 100%;
   }
   pre.highlight {
     // Shade and adjust margins to compensate

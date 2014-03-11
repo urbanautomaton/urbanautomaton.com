@@ -19,15 +19,19 @@ $code-inline-size:  0.95em;
 $code-pre-size:     0.825em;
 $code-inline-bg:    #f4f4f4;
 
-$break: 700px;
+$break-small: 540px;
+$break-large: 700px;
 
 // usage: @include respond-to(small-screens) { [some_rules] }
 @mixin respond-to($media) {
   @if $media == small-screens {
-    @media only screen and (max-width: $break) { @content; }
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large) { @content; }
   }
   @else if $media == wide-screens {
-    @media only screen and (min-width: $break + 1) { @content; }
+    @media only screen and (min-width: $break-large + 1) { @content; }
   }
 }
 
