@@ -8,9 +8,11 @@ gem 'rouge'
 gem 'sass'
 gem 'compass'
 gem 'typeup'
-gem 'rb-fsevent'
-gem 'listen'
 gem 'builder'
+
+gem 'guard'
+gem 'guard-nanoc'
+
 gem 'pry'
 gem 'pry-debugger'
 gem 'pry-doc'

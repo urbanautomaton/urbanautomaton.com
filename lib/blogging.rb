@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-debugger'
 include Nanoc::Helpers::Blogging
 
 def published_articles
