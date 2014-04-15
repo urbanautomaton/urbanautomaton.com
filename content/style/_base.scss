@@ -11,6 +11,8 @@ $body-font-family:  'Merriweather', Georgia, Palatino, Times, 'Times New Roman',
 $body-text-color:   #444;
 $body-text-size:    1em;
 
+$highlight-blue: #84BEE8;
+
 $header-font-family:  'Open Sans', Helvetica, Arial, sans-serif;
 $header-text-color:   #222;
 
@@ -58,4 +60,11 @@ pre       { font-size:    $code-pre-size;    }
 
 a { text-decoration: none; }
 
-em { font-weight: bold; }
+em, strong { font-weight: bold; }
+
+blockquote {
+  @include border-radius(4px);
+  quotes: "\201C""\201D";
+  border-left: .5em solid $highlight-blue;
+  background: $code-inline-bg;
+}
