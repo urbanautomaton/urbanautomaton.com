@@ -40,9 +40,7 @@ body {
   }
   pre.highlight {
     // Shade and adjust margins to compensate
-    // display: inline-block;
     @include border-radius(4px);
-    @include single-box-shadow($default-box-shadow-color, .25em, .25em, .75em);
     margin-bottom: $typeup-lineHeight + .75em;
   }
   code {
