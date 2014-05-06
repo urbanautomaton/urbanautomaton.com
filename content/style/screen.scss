@@ -41,7 +41,7 @@ body {
   pre.highlight {
     // Shade and adjust margins to compensate
     @include border-radius(4px);
-    margin-bottom: $typeup-lineHeight + .75em;
+    margin-bottom: $typeup-lineHeight + .5em;
   }
   code {
     @include border-radius(3px);
