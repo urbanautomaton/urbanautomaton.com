@@ -1,7 +1,8 @@
 require 'rake/clean'
+
 CLEAN.include("output/**")
 
-require 'open3'
+MISSING_TITLE       = "You must give a post title (rake new_post TITLE='something')"
 
 task(:default => [:rebuild])
 
@@ -34,7 +35,7 @@ end
 
 desc("New blog post - requires TITLE env variable")
 task(:new_post) do
-  raise ArgumentError, "You must give a post title (rake new_post TITLE='something')" unless ENV["TITLE"]
+  raise ArgumentError, MISSING_TITLE unless ENV["TITLE"]
 
   title     = ENV["TITLE"]
   slug_base = title.downcase.gsub(/[^[:alpha:]\d ]/, "").squeeze(" ").gsub(/ /, "-")[0..50]
