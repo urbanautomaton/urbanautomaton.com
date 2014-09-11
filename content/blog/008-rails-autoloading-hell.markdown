@@ -434,8 +434,6 @@ As with so many of Rails' conveniences, autoloading removes a barrier to
 entry, and that's a worthy goal. The more I wrestle with it, though, the
 more I think it's something I'd prefer to avoid.
 
----
-
 [^1]:
   More than that, Rails automatically loads all of our gems for us, so
   we don't even have to explicitly load *other* people's code. Reasons

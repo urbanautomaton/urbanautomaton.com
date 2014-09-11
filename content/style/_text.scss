@@ -18,6 +18,10 @@ $startModularScaleAt: 3;
     background: $code-inline-bg;
   }
 
+  span.nowrap {
+    display: inline-block;
+  }
+
   img {
     display:    block;
     margin:     0 auto;

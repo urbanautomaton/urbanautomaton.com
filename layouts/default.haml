@@ -28,6 +28,6 @@
       #content.blog-text
         %h1= @item[:title]
         = yield
-        - if @item[:comments]
+        - if @item[:comments] && !@item[:draft]
           = render('snippets/disqus')
     = render('snippets/google_analytics')
