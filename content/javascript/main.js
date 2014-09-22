@@ -33,7 +33,13 @@ $(function () {
     });
   };
 
-  var jqconsole = $('#console').jqconsole('', '> ');
-  startEliza(jqconsole);
+  $('#console .start-eliza').on('click', function(e) {
+    var consoleContainer = $('#console')
+    consoleContainer.html('');
+    var jqconsole = consoleContainer.jqconsole('', '> ');
+    startEliza(jqconsole);
+    e.preventDefault();
+  });
+
 });
 

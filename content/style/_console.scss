@@ -5,16 +5,28 @@ $cursor_off: transparent;
 
 #console {
   background-color: $console_bg;
-  color: $console-fg;
+  color: $console_fg;
   position: relative;
   width: 700px;
   height: 500px;
+}
+
+.start-eliza {
+  text-align: center;
+  color: $body-text-color;
+  &:hover, &:visited {
+    color: $body-text-color;
+  }
 }
 
 .jqconsole-cursor {
   font-size: 1.15em;
   &:before {
     content: "_";
+  }
+  .jqconsole-blurred &:before {
+    color: $console_fg;
+    // content: "▒";
   }
   .jqconsole-blurred & {
     -webkit-animation: none;
