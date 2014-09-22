@@ -5,6 +5,10 @@ require 'rouge/plugins/redcarpet'
 class HighlitHTML < Redcarpet::Render::HTML
   include Redcarpet::Render::SmartyPants
   include Rouge::Plugins::Redcarpet
+
+  def initialize(extensions={})
+    super(extensions.merge(:with_toc_data => true))
+  end
 end
 
 class HighlitMarkdownFilter < Nanoc::Filter
