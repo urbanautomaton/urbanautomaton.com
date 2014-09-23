@@ -10,7 +10,7 @@ desc("Clean output and recompile")
 task(:rebuild => [:clean, :compile])
 
 task(:view) do
-  port = ENV.fetch("PORT", 3000)
+  port = ENV.fetch("PORT", 3001)
   exec("bundle exec rackup config.ru -p #{port}")
 end
 
