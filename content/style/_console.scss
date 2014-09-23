@@ -12,6 +12,7 @@ $cursor_off: transparent;
 }
 
 .start-eliza {
+  @extend code;
   text-align: center;
   color: $body-text-color;
   &:hover, &:visited {
