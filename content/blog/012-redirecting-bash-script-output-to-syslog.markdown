@@ -3,7 +3,7 @@ kind: article
 title: Redirecting bash script output to syslog
 created_at: 2014-09-09 14:07
 comments: true
-draft: true
+draft: false
 categories: [bash, shell, logging, syslog]
 ---
 
@@ -12,8 +12,8 @@ That's right, a post about logging from bash scripts. Cool as *fuck*.
 Anyway, this was prompted by the following tweet:
 
 <blockquote class="twitter-tweet" lang="en"><p>Pretty much the best
-thing ever you could put at the top of your bash script:<code>&#10;&#10;exec
-1&gt; &gt;(logger -s -t $(basename $0)) 2&gt;&amp;1</code></p>&mdash; Eric
+thing ever you could put at the top of your bash script:<span class="nowrap"><code>&#10;&#10;exec
+1&gt; &gt;(logger -s -t $(basename $0)) 2&gt;&amp;1</code></span></p>&mdash; Eric
 Lindvall (@lindvall) <a
 href="https://twitter.com/lindvall/status/509054237267853312">September
 8, 2014</a></blockquote>
@@ -61,7 +61,7 @@ exec 1> >(some-command) 2>&1
 
 This is pretty simple redirection, obscured by that charming and easily
 google-able bash syntax that we all <s>know and love</s> bluff and
-tolerate. There are two redirections:
+tolerate. There are two redirections, the first being:
 
 ```bash
 1> >(some-command)
@@ -88,7 +88,7 @@ running in the background. In effect, this is the same as running the
 script at the command line like so:
 
 ```
-$ ./some_script 2>&1 | some-command
+$ ./some-script 2>&1 | some-command
 ```
 In this case, `some-command` is:
 
@@ -213,7 +213,8 @@ err "writing to stderr"
 
 This way we get our normal terminal output via the shell's own stdout
 and stderr, but we can still send messages to syslog and tag them with
-appropriate priorities.
+appropriate priorities (we can also fancy up our terminal output with
+timestamps and colours if we want to).
 
 The downside is that we have to explicitly log everything we want sent
 to syslog. If we want the output of a command our script runs to be sent
