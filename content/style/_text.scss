@@ -10,7 +10,7 @@ $startModularScaleAt: 3;
 .blog-text {
   padding: 2em;
 
-  @include typeup-container(1.1em, 700px, 1);
+  @include typeup-container(1.1em, $break-large, 1);
 
   blockquote {
     @include border-radius(4px);

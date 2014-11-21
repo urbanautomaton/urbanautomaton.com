@@ -22,7 +22,7 @@ body {
     width: 100%;
   }
   @include respond-to(wide-screens) {
-    width: 700px;
+    width: $break-large;
     margin: auto;
   }
 }
