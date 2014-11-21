@@ -11,5 +11,5 @@ the majority of the "intelligence" lives) is mostly faithful to the
 original.
 
 The rest of my publicly available code can also be found [on
-Github](https://github.com/urbanautomaton.com). My dotfiles are really
+Github](https://github.com/urbanautomaton). My dotfiles are really
 good, no honestly they are.
