@@ -63,9 +63,9 @@ Ruby method declarations, which it treats as funcnames:
 ```
 
 When we use the second form of `git -L`, the regex we provide is matched
-only against method declarations within the specified file. So in my
-example file, the log command will return the history for only the
-marked lines:
+only against funcname lines, i.e. the method declarations within the
+specified file. So for example, the log command above would return the
+history for only the marked lines:
 
 ```ruby
 # lib/some_class.rb
@@ -78,6 +78,7 @@ class SomeClass
   def some_other_method   # next funcname
     "Goodbye Everybody!"
   end
+
 end
 ```
 
