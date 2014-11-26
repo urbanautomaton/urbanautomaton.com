@@ -19,7 +19,7 @@ $(function () {
 
   var waitRespond = function (jqconsole, eliza, client) {
     jqconsole.Prompt(true, function (input) {
-      eliza.say(input)
+      eliza.say(input);
       if (!client.finished) {
         waitRespond(jqconsole, eliza, client);
       } else {
@@ -34,7 +34,7 @@ $(function () {
   };
 
   $('#console .start-eliza').on('click', function(e) {
-    var consoleContainer = $('#console')
+    var consoleContainer = $('#console');
     consoleContainer.html('');
     var jqconsole = consoleContainer.jqconsole('', '> ');
     startEliza(jqconsole);
