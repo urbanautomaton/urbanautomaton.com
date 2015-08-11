@@ -3,7 +3,7 @@
   %head
     %meta{ :charset => "utf-8" }
     %title
-      = [@item[:title], "urbanautomaton.com"].compact.uniq.join(" &mdash; ")
+      = @item[:title] || "urbanautomaton.com"
     %link{ :rel => "stylesheet", :href => "/style/screen.css", :media => "screen" }
     %link{ :rel => "stylesheet", :href => "/style/print.css",  :media => "print" }
     /[if !IE]
