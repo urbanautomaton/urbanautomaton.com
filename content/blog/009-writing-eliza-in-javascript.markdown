@@ -20,10 +20,11 @@ Sbaitso](http://en.wikipedia.org/wiki/Dr._Sbaitso) as a placeholder:
 > 
 > SO, TELL ME ABOUT YOUR PROBLEMS.
 
-Dr. Sbaitso (a toy program that shipped with early Sound Blaster cards)
-is a close copy of [ELIZA](http://en.wikipedia.org/wiki/ELIZA), one of
-the first chatterbots ever made. Written by Joseph Weizenbaum in the mid
-'60s, it uses natural language processing to mimic a [Rogerian
+Dr. Sbaitso, a toy program that shipped with early Sound Blaster PC
+audio cards, is a close copy of
+[ELIZA](http://en.wikipedia.org/wiki/ELIZA), one of the first
+chatterbots ever made. Written by Joseph Weizenbaum in the mid 1960s, it
+uses natural language processing to mimic a [Rogerian
 psychotherapist](http://en.wikipedia.org/wiki/Rogerian_psychotherapy).
 
 With simple keyword and pattern matching, ELIZA rearranges the user's
@@ -39,7 +40,7 @@ ELIZA's "intelligence" lives in a script, which consists primarily of a
 list of keywords, weighted by importance, each with a number of
 decomposition rules, e.g.:
 
-```
+```yaml
 key:
   word: was
   weight: 5
@@ -69,10 +70,7 @@ that redirect to a single set of responses containing variations on,
 
 ## A project!
 
-I submit to you that no programmer can have used this placeholder text
-without feeling an obligation to implement ELIZA for real. And as I
-already felt I really ought to learn Javascript properly, this is what I
-did.
+Immediately having typed this placeholder text, I realised I was obliged
 
 As well as build a stupid thing on my website, I also wanted to get a
 feeling for TDD in Javascript. I also decided to have a stab at doing it
