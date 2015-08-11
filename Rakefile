@@ -2,7 +2,7 @@ require 'rake/clean'
 
 CLEAN.include("output/**")
 
-MISSING_TITLE       = "You must give a post title (rake new_post TITLE='something')"
+MISSING_TITLE = "You must give a post title (rake new_post TITLE='something')"
 
 task(:default => [:rebuild])
 
