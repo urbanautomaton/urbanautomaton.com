@@ -3,7 +3,6 @@ kind: article
 title: "PlePuProPro: The Pledge to Put Prolog in Production"
 created_at: 2015-08-10 20:55
 comments: true
-draft: true
 categories: []
 ---
 
@@ -54,7 +53,7 @@ company to company, but the broad progression is as follows:
 
 Vanishingly few users of the Propositional strategy have reported
 success, so we recommend this only in situations where you are seeking
-an exit for other reasons, and then only when what you are trying to
+an exit for other reasons, and then only when what you are seeking to
 exit is software development as a profession.
 
 ### 2. First-Order
