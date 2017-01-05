@@ -9,11 +9,13 @@ task(:default => [:rebuild])
 desc("Clean output and recompile")
 task(:rebuild => [:clean, :compile])
 
+desc("Start a local server for the site")
 task(:view) do
   port = ENV.fetch("PORT", 3001)
   exec("bundle exec rackup config.ru -p #{port}")
 end
 
+desc("Start guard to recompile on changes")
 task(:watch) do
   exec("bundle exec guard")
 end
