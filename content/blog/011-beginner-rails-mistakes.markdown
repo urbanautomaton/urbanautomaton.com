@@ -3,7 +3,7 @@ kind: article
 title: Beginner Rails Mistakes
 created_at: 2014-05-16 13:37
 comments: true
-draft: true
+reject: true
 categories: [Rails]
 ---
 

@@ -78,6 +78,8 @@ end
 route '/blog/*/' do
   if item[:draft]
     draft_route(item) + 'index.html'
+  elsif item[:reject]
+    reject_route(item) + 'index.html'
   else
     blog_route(item) + 'index.html'
   end

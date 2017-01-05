@@ -3,7 +3,7 @@ kind: article
 title: The Reluctant Sysadmin
 created_at: 2014-04-14 10:54
 comments: true
-draft: true
+reject: true
 categories: [Devops, Sysadmin, Automation]
 ---
 

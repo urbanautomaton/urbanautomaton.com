@@ -1,11 +1,15 @@
 include Nanoc::Helpers::Blogging
 
 def published_articles
-  sorted_articles.reject{|a| a[:draft]}
+  sorted_articles.reject{|a| a[:draft] || a[:reject] }
 end
 
 def draft_articles
   sorted_articles.select{|a| a[:draft]}
+end
+
+def reject_articles
+  sorted_articles.select{|a| a[:reject]}
 end
 
 def blog_route(item)
@@ -14,6 +18,10 @@ end
 
 def draft_route(item)
   "/drafts" + item.identifier.gsub(/blog\//, "")
+end
+
+def reject_route(item)
+  "/rejects" + item.identifier.gsub(/blog\//, "")
 end
 
 def publish_date(item)

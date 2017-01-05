@@ -1,0 +1,12 @@
+---
+title: blog rejects
+---
+
+:markdown
+  Rejected blog posts. Not to be linked to!
+
+%ul
+  - reject_articles.each do |article|
+    %li
+      %a{ :href => article.path }= article[:title]
+

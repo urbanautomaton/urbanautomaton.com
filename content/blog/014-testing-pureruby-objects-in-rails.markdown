@@ -3,7 +3,7 @@ kind: article
 title: Testing pure-Ruby objects in Rails
 created_at: 2015-01-28 12:01
 comments: true
-draft: true
+reject: true
 categories: [Rails, testing, TDD]
 ---
 
