@@ -15,7 +15,7 @@ lines of [direnv](https://github.com/direnv/direnv) and
 solves problems of the following sort:
 
 > I've `cd`'d to a directory containing a node project. I'd like to add
-> `.node_modules/bin` to my `PATH`.
+> `node_modules/.bin` to my `PATH`.
 
 or
 
@@ -46,12 +46,12 @@ functions](https://github.com/urbanautomaton/dotfiles/blob/b606358e79011e281b756
 function enter_node_project() {
   local -r project_dir=${1}
 
-  prepend_path "${project_dir}/.node_modules/bin"
+  prepend_path "${project_dir}/node_modules/.bin"
 }
 
 # This runs when you leave a directory containing a .nodeproject
 function exit_node_project() {
-  remove_from_path "${project_dir}/.node_modules/bin"
+  remove_from_path "${project_dir}/node_modules/.bin"
 }
 
 # This specifies the file to look for (.nodeproject) and the
@@ -68,7 +68,7 @@ $ echo $PATH
 /bin:/usr/bin
 $ touch .nodeproject
 $ echo $PATH
-/path/to/my_node_project/.node_modules/bin:/bin:/usr/bin
+/path/to/my_node_project/node_modules/.bin:/bin:/usr/bin
 $ cd /
 $ echo $PATH
 /bin:/usr/bin
