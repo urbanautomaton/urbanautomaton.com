@@ -1,15 +1,15 @@
 include Nanoc::Helpers::Blogging
 
 def published_articles
-  sorted_articles.reject{|a| a[:draft] || a[:reject] }
+  sorted_articles.reject { |a| a[:draft] || a[:reject] }
 end
 
 def draft_articles
-  sorted_articles.select{|a| a[:draft]}
+  sorted_articles.select { |a| a[:draft] }
 end
 
 def reject_articles
-  sorted_articles.select{|a| a[:reject]}
+  sorted_articles.select { |a| a[:reject] }
 end
 
 def blog_route(item)
