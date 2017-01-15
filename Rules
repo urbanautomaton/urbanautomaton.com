@@ -36,7 +36,7 @@ end
 
 compile '/blog/*/' do
   filter :markdown
-  layout 'default'
+  layout 'blog'
 end
 
 compile '/blog/' do
