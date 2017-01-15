@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Stop vim erasing Deckset slideshow settings
-created_at: 2016-11-30 14:10
+created_at: 2016-11-30T14:10:00+00:00
 comments: true
 categories: []
 ---

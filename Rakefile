@@ -52,7 +52,7 @@ task(:new_post) do
 ---
 kind: article
 title: #{title}
-created_at: #{Time.now.strftime("%Y-%m-%d %H:%M")}
+created_at: #{Time.now.iso8601}
 comments: true
 draft: true
 categories: []

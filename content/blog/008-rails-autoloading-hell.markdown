@@ -1,7 +1,7 @@
 ---
 kind: article
 title: "Rails autoloading &#8212; how it works, and when it doesn't"
-created_at: 2013-08-27 12:00
+created_at: 2013-08-27T12:00:00+00:00
 comments: true
 draft: false
 categories: [Rails, autoloading, magic]

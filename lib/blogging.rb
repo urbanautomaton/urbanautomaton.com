@@ -13,7 +13,7 @@ def reject_articles
 end
 
 def blog_route(item)
-  item.identifier.gsub(/\d{3}-/, publish_date(item))
+  item.identifier.gsub(/\d{3}-/, date_url_segment(item))
 end
 
 def draft_route(item)
@@ -33,5 +33,9 @@ def has_comments?(item)
 end
 
 def publish_date(item)
-  DateTime.parse(item[:publish_at] || item[:created_at]).strftime("%Y/%m/%d/")
+  item[:publish_at] || item[:created_at]
+end
+
+def date_url_segment(item)
+  publish_date(item).strftime("%Y/%m/%d/")
 end

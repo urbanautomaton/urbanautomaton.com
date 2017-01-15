@@ -1,7 +1,7 @@
 ---
 kind: article
 title: "'git grep' and Language-Aware Diffs"
-created_at: 2011-07-28 17:56
+created_at: 2011-07-28T17:56:00+00:00
 comments: true
 categories: 
 ---

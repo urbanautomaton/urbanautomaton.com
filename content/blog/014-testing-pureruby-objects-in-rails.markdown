@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Testing pure-Ruby objects in Rails
-created_at: 2015-01-28 12:01
+created_at: 2015-01-28T12:01:00+00:00
 comments: true
 reject: true
 categories: [Rails, testing, TDD]

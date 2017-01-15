@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Beginner Rails Mistakes
-created_at: 2014-05-16 13:37
+created_at: 2014-05-16T13:37:00+00:00
 comments: true
 reject: true
 categories: [Rails]

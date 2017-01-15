@@ -1,7 +1,7 @@
 ---
 kind: article
 title: "PlePuProPro: The Pledge to Put Prolog in Production"
-created_at: 2015-08-10 20:55
+created_at: 2015-08-10T20:55:00+00:00
 comments: true
 categories: []
 ---

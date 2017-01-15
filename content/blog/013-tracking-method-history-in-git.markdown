@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Tracking method history in git
-created_at: 2014-09-22 14:23
+created_at: 2014-09-22T14:23:00+00:00
 comments: true
 draft: false
 categories: [git]

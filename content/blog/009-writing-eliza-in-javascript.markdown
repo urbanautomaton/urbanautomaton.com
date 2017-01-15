@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Writing ELIZA in Javascript
-created_at: 2013-09-22 10:22
+created_at: 2013-09-22T10:22:00+00:00
 comments: true
 draft: true
 categories: []

@@ -1,7 +1,7 @@
 ---
 kind: article
 title: Redirecting bash script output to syslog
-created_at: 2014-09-09 14:07
+created_at: 2014-09-09T14:07:00+00:00
 comments: true
 draft: false
 categories: [bash, shell, logging, syslog]

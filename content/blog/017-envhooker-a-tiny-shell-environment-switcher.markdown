@@ -1,7 +1,7 @@
 ---
 kind: article
 title: env_hooker, a tiny shell environment switcher
-created_at: 2017-01-05 21:23
+created_at: 2017-01-05T21:23:00+00:00
 comments: true
 categories: []
 ---
