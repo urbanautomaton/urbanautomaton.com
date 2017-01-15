@@ -9,4 +9,7 @@
       #content.blog-text
         %h1= @item[:title]
         = yield
+        - if has_comments?(@item)
+          = render('snippets/disqus')
     = render('snippets/google_analytics')
+
