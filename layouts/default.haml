@@ -1,32 +1,14 @@
 !!!
 %html{ :lang => "en" }
   %head
-    %meta{ :charset => "utf-8" }
-    %title
-      = @item[:title] || "urbanautomaton.com"
-    %link{ :rel => "stylesheet", :href => "/style/screen.css", :media => "screen" }
-    %link{ :rel => "stylesheet", :href => "/style/print.css",  :media => "print" }
-    /[if !IE]
-      %link{ :rel => "stylesheet", :href => "/style/fonts.css" }
-    /[if IE]
-      %link{ :rel => "stylesheet", :href => "/style/iefonts.css" }
-    %link{ :rel => "icon",          :href => "/ua-favicon.ico", :type => "image/x-icon" }
-    %link{ :rel => "shortcut icon", :href => "/ua-favicon.ico", :type => "image/x-icon" }
-    %link{ :rel => "alternate", :href => "/atom.xml", :type => "application/atom+xml", :title => "urbanautomaton.com" }
-    %meta{ :name => "viewport", :content => "width=device-width" }
+    = render('snippets/head')
   %body
     #main
       #sidebar
-        %ul.nav
-          - site_sections(@item).each do |label, link, li_class|
-            %li{ :class => "site-section #{li_class}" }
-              %a{ :href => link }= label
-          - external_links.each do |label, link|
-            %li.external-link
-              %a{ :href => link }= label
+        = render('snippets/main_nav')
       #content.blog-text
         %h1= @item[:title]
         = yield
-        - if @item[:comments] && !@item[:draft]
+        - if has_comments?(@item)
           = render('snippets/disqus')
     = render('snippets/google_analytics')

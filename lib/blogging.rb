@@ -24,6 +24,14 @@ def reject_route(item)
   "/rejects" + item.identifier.gsub(/blog\//, "")
 end
 
+def published?(item)
+  !(item[:draft] || item[:reject])
+end
+
+def has_comments?(item)
+  published?(item) && item[:comments]
+end
+
 def publish_date(item)
   DateTime.parse(item[:publish_at] || item[:created_at]).strftime("%Y/%m/%d/")
 end

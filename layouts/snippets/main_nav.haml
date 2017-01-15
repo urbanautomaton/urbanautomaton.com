@@ -1,0 +1,7 @@
+%ul.nav
+  - site_sections(@item).each do |label, link, li_class|
+    %li{ :class => "site-section #{li_class}" }
+      %a{ :href => link }= label
+  - external_links.each do |label, link|
+    %li.external-link
+      %a{ :href => link }= label
