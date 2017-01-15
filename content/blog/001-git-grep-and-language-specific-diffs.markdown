@@ -7,7 +7,7 @@ categories:
 ---
 
 I'm a heavy user of git-diff -- before every commit I review my changes
-for a final sanity check. However, I only recently discovered that my
+for a final sense check. However, I only recently discovered that my
 diffs weren't telling me as much as they might.
 
 Git's diffs are presented in *hunks*, with each set of adjacent changes
