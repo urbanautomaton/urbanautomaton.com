@@ -74,6 +74,12 @@ $ echo $PATH
 /bin:/usr/bin
 ```
 
+Note: while I've used the `node_modules/.bin` example here because it's
+simple, there are [security
+consideration](https://github.com/urbanautomaton/env_hooker#security-notes)
+you should be aware of before adding project-local directories to your
+`PATH` in an environment hook.
+
 For a more complex example setting up chruby and gemsets for a ruby
 project, you can have a look
 [here](https://github.com/urbanautomaton/dotfiles/blob/cb3e08d52a3bc05349e9d711b78e14f29afb7cde/env_hooks/ruby).
