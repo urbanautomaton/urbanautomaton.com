@@ -82,7 +82,7 @@ project, you can have a look
 > it's simple, there are [security
 > considerations](https://github.com/urbanautomaton/env_hooker#security-notes)
 > you should be aware of before adding project-local directories to your
-> `PATH` in an environment hook.
+> `$PATH` in an environment hook.
 
 ## Why did you do this when those other things?
 
