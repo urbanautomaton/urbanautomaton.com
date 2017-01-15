@@ -49,4 +49,13 @@ $startModularScaleAt: 3;
     line-height:     1em;
   }
 
+  .publish-time {
+    float: right;
+    color: $color-light-grey;
+  }
+
+  .clear {
+    clear: both;
+  }
+
 }

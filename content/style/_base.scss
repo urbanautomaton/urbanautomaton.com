@@ -7,14 +7,18 @@
 
 $background : #fff;
 
+$color-black: #222;
+$color-dark-grey: #444;
+$color-light-grey: #888;
+
 $body-font-family:  'Merriweather', Georgia, Palatino, Times, 'Times New Roman', sans-serif;
-$body-text-color:   #444;
+$body-text-color:   $color-dark-grey;
 $body-text-size:    1em;
 
 $highlight-blue: #84BEE8;
 
 $header-font-family:  'Open Sans', Helvetica, Arial, sans-serif;
-$header-text-color:   #222;
+$header-text-color:   $color-black;
 
 $code-font-family:  Monaco, Consolas, monospace;
 $code-inline-size:  0.95em;

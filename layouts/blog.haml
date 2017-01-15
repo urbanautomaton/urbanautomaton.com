@@ -8,6 +8,10 @@
         = render('snippets/main_nav')
       #content.blog-text
         %h1= @item[:title]
+        %p.publish-time
+          %time{ datetime: publish_date(@item) }
+            = publish_date(@item).strftime("%-d %B, %Y")
+        .clear
         = yield
         - if has_comments?(@item)
           = render('snippets/disqus')
