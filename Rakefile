@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'time'
 
 CLEAN.include("output/**")
 
