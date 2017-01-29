@@ -3,7 +3,6 @@ kind: article
 title: Passable 2D Birds
 created_at: 2017-01-29T13:15:26+00:00
 comments: true
-draft: true
 categories: []
 ---
 
