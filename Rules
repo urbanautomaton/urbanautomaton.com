@@ -30,6 +30,9 @@ end
 compile '/files/*/' do
 end
 
+compile '/toys/*/' do
+end
+
 compile '/blog/feed/' do
   filter :erb
 end
@@ -69,6 +72,10 @@ end
 
 route '/files/*/' do
   [item.identifier.chop.gsub(/^\/files/,""), item[:extension]].compact.join(".")
+end
+
+route '/toys/*/' do
+  [item.identifier.chop, item[:extension]].compact.join(".")
 end
 
 route '/blog/feed/' do
