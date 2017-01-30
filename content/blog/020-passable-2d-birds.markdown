@@ -48,11 +48,14 @@ I'm quite happy with this, but there's lots to improve upon.
 ### Steering
 
 While the behaviours are all present, I'm not at all sure they're well
-balanced. In particular I don't think the separation behaviour has
+balanced. <s>In particular I don't think the separation behaviour has
 enough effect at close range, and I suspect that the alignment and
 goal-seeking behaviours are dominating. Without the goal-seeking, the
 birds have a tendency to drift off in small clumps, never to be seen
-again.
+again.</s> (Edit: I've updated the sim with much better repulsion
+behaviour, and this has made a huge difference. I can now watch this for
+quite a while without getting bored, which is one way of measuring
+whether it's any good, I guess.)
 
 The randomly changing goal is also responsible for pretty much all of
 the apparent dynamism of the system. Without this, the birds fall into a

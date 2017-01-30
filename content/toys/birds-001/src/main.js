@@ -3,12 +3,12 @@ var ctx = canvas.getContext("2d");
 
 var X = canvas.width;
 var Y = canvas.height;
-var SCALE = 0.9;
-var BIRDS = 75;
+var SCALE = 0.5;
+var BIRDS = 100;
 var ANIMATING = true;
 var ANIMATION_REQUEST_IDS = [];
 var MIN_VELOCITY = 40;
-var MAX_VELOCITY = 120;
+var MAX_VELOCITY = 150;
 var NEIGHBOUR_RADIUS = 75;
 var VISIBLE_ANGLE = Math.PI * .8;
 var GOAL = $V([0, 0]);
@@ -138,15 +138,21 @@ function sees(delta, velocity) {
 }
 
 function repelVector(delta) {
-  return delta.toUnitVector().x(-1);
+  return delta.toUnitVector().x(-30/delta.modulus());
 }
 
-function sumVectors(vs) {
-  return _.reduce(
+function meanVector(vs) {
+  var sum = _.reduce(
     vs,
     function(sum, el) { return sum.add(el); },
     $V([0, 0])
   );
+
+  if (vs.length > 1) {
+    sum = sum.x(1/vs.length);
+  }
+
+  return sum;
 }
 
 function clamp(vector, min, max) {
@@ -179,17 +185,19 @@ function updateAcceleration() {
     var centroids = [];
 
     for (var j=0; j<BIRDS; j++) {
-      var iToj = pos[j].subtract(pos[i]);
+      if (i !== j) {
+        var iToj = pos[j].subtract(pos[i]);
 
-      if (sees(iToj, vel[i])) {
-        repel = repel.add(repelVector(iToj).x(15));
-        headings.push(vel[j]);
-        centroids.push(iToj);
+        if (sees(iToj, vel[i])) {
+          repel = repel.add(repelVector(iToj).x(15));
+          headings.push(vel[j]);
+          centroids.push(iToj);
+        }
       }
     }
 
-    var heading = sumVectors(headings).x(1/headings.length);
-    var centroid = sumVectors(centroids).x(1/centroids.length);
+    var heading = meanVector(headings).x(1.5);
+    var centroid = meanVector(centroids);
     var goal = goalSeeking(pos[i]);
 
     allRepels.push(repel);
@@ -246,7 +254,7 @@ init();
 ANIMATION_REQUEST_IDS.push(window.requestAnimationFrame(step));
 
 function updateGoal() {
-  GOAL = $V([randPlusMinus(X/4), randPlusMinus(Y/4)]);
+  GOAL = $V([randPlusMinus(X/3), randPlusMinus(Y/3)]);
   window.setTimeout(updateGoal, 5000);
 }
 
