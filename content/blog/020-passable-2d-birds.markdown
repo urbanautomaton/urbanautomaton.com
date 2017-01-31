@@ -12,7 +12,8 @@ famous [boids](http://www.red3d.com/cwr/boids/) algorithm, and at first
 in 2D.
 
 I've managed to get this first step to a point I'm vaguely happy with.
-It looks like this:
+It looks like this (code at time of writing is
+[here](https://github.com/urbanautomaton/boids/blob/b60991477baadacae25ff39b7faa735dafb21f3f/001-boids/index.html)):
 
 <script src="/toys/birds-001/vendor/underscore-min.js" type="text/javascript"></script>
 <script src="/toys/birds-001/vendor/sylvester.js" type="text/javascript"></script>
