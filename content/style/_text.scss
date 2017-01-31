@@ -49,9 +49,16 @@ $startModularScaleAt: 3;
     line-height:     1em;
   }
 
+  td {
+    padding: 0.125em;
+  }
+
   .publish-time {
-    float: right;
     color: $color-light-grey;
+  }
+
+  .float-right {
+    float: right;
   }
 
   .clear {

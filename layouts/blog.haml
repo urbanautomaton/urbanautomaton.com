@@ -9,7 +9,7 @@
       #content.blog-text
         %h1= @item[:title]
         = yield
-        %p.publish-time
+        %p.publish-time.float-right
           %time{ datetime: publish_date(@item) }
             = publish_date(@item).strftime("%-d %B, %Y")
         .clear

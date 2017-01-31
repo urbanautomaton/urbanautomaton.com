@@ -6,7 +6,11 @@ title: blog
   Some not-particularly exciting things I wrote, usually about whatever
   it was I happened to be working on at the time.
 
-%ul
+%table
   - published_articles.each do |article|
-    %li
-      %a{ :href => article.path }= article[:title]
+    %tr
+      %td.publish-time
+        %time{ datetime: publish_date(article) }
+          = publish_date(article).strftime("%Y-%m-%d")
+      %td
+        %a{ :href => article.path }= article[:title]
