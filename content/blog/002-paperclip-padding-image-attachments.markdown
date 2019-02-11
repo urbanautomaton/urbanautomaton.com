@@ -7,11 +7,10 @@ categories:
 ---
 
 At [Tribesports](http://tribesports.com) we deal with a vast quantity of
-external images. We use [thoughtbot](http://thoughtbot.com/)&rsquo;s
-excellent [Paperclip](https://github.com/thoughtbot/paperclip) gem for
-all of our image attachments; it allows us to manage everything from
-design formats to CDN storage with so little effort it's almost
-insulting.
+external images. We use [thoughtbot](http://thoughtbot.com/)'s excellent
+[Paperclip](https://github.com/thoughtbot/paperclip) gem for all of our
+image attachments; it allows us to manage everything from design formats
+to CDN storage with so little effort it's almost insulting.
 
 I'm currently resizing the images for our site to fit a
 new design, and came across a requirement not supported by

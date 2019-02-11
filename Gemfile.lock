@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:vmg/redcarpet.git
+  revision: 94f6e27bdf2395efa555a7c772a3d8b70fb84346
+  specs:
+    redcarpet (3.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -83,7 +89,6 @@ GEM
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    redcarpet (3.4.0)
     rouge (0.3.9)
       thor
     sass (3.2.7)
@@ -117,7 +122,7 @@ DEPENDENCIES
   pry-stack_explorer
   puma
   rack-livereload
-  redcarpet
+  redcarpet!
   rouge
   sass
   typeup
