@@ -14,12 +14,12 @@ lines of [direnv](https://github.com/direnv/direnv) and
 [autoenv](https://github.com/kennethreitz/autoenv), i.e. something that
 solves problems of the following sort:
 
-> I've `cd`'d to a directory containing a node project. I'd like to add
+> I've `cd`d to a directory containing a node project. I'd like to add
 > `node_modules/.bin` to my `PATH`.
 
 or
 
-> I've `cd`'d to a directory containing a ruby project. I'd like to
+> I've `cd`d to a directory containing a ruby project. I'd like to
 > switch to the correct ruby version for the project, and set up gems
 > to install and run from a project-specific location.
 
