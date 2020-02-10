@@ -34,8 +34,7 @@ prune:
   # .git, .svn etc.
   exclude: [ '.git', '.hg', '.svn', 'CVS' ]
 
-# 3.x -> 4.x migration update
-string_pattern_type: legacy
+string_pattern_type: glob
 
 # The data sources where nanoc loads its data from. This is an array of
 # hashes; each array element represents a single data source. By default,
