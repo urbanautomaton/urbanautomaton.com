@@ -13,6 +13,5 @@ end
 def external_links
   [
     ['tweets',    'https://twitter.com/urbanautomaton'],
-    ['nonsense',  'http://www.deadbadger.net'],
   ]
 end
