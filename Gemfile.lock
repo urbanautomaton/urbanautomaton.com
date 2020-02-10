@@ -67,6 +67,7 @@ GEM
     nanoc (3.8.0)
       cri (~> 2.3)
     nenv (0.2.0)
+    nio4r (2.5.2)
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -83,7 +84,8 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    puma (2.14.0)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     rack (2.0.6)
     rack-livereload (0.3.16)
       rack
