@@ -13,15 +13,15 @@ def reject_articles
 end
 
 def blog_route(item)
-  item.identifier.gsub(/\d{3}-/, date_url_segment(item))
+  item.identifier.to_s.gsub(/\d{3}-/, date_url_segment(item))
 end
 
 def draft_route(item)
-  "/drafts" + item.identifier.gsub(/blog\//, "")
+  "/drafts" + item.identifier.to_s.gsub(/blog\//, "")
 end
 
 def reject_route(item)
-  "/rejects" + item.identifier.gsub(/blog\//, "")
+  "/rejects" + item.identifier.to_s.gsub(/blog\//, "")
 end
 
 def published?(item)
