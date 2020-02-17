@@ -38,7 +38,7 @@ end
 
 desc("Deploy current output directory to S3")
 task(:deploy_s3) do
-  system('cd output && AWS_PROFILE=ua-scoffey aws s3 sync . s3://www.urbanautomaton.com/ --acl public-read --exclude ".git/*"')
+  system('./deploy.sh')
 end
 
 desc("New blog post - requires TITLE env variable")
