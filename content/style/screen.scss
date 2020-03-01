@@ -12,8 +12,8 @@ body {
 }
 
 #main {
-  min-width: 40em;
   @include respond-to(small-screens) {
+    min-width: 40em;
     width: 100%;
   }
   @include respond-to(medium-screens) {
