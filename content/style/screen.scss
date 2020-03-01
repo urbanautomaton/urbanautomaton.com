@@ -12,6 +12,7 @@ body {
 }
 
 #main {
+  min-width: 40em;
   @include respond-to(small-screens) {
     width: 100%;
   }
