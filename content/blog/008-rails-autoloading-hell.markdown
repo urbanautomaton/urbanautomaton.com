@@ -7,6 +7,22 @@ draft: false
 categories: [Rails, autoloading, magic]
 ---
 
+## Update, 2020-03-21
+
+As of Rails 6, the autoloading framework used
+by Rails has been replaced with a new gem,
+[zeitwerk](https://github.com/fxn/zeitwerk). The below
+information remains relevant for Rails 5.x and lower, or Rails 6 apps
+using [classic autoloading
+mode](https://guides.rubyonrails.org/autoloading_and_reloading_constants_classic_mode.html).
+
+I'm really looking forward to reading into how zeitwerk werks; it sounds
+like it's solved many (all?) of the troubles this post documents, so
+hats off to those who worked on it, principally [Xavier
+Noria](https://github.com/fxn)!
+
+## Original post
+
 Rails is, in part, known and loved for its ease of initial development.
 A big part of the "wow!" factor of DHH's famous blog demonstration, its
 conveniences lower the turnaround time between writing code and seeing
