@@ -388,13 +388,16 @@ relevant file from our loader path (if it exists).
 
 ## Conclusion
 
+There's more to Zeitwerk (eager loading, reloading, thread safety and
+more), but this has gone on long enough.
+
 This is all really pleasing. There's still complexity here, but the
 foundations seem really solid. I haven't yet worked on an app using the
 new loader, but when I do I feel like I'll have far more confidence that
-I can use constants (and in particular, namespace modules) freely
-without worrying about autoloading ruining my day.
+I can use constants (and in particular, namespace modules) more or less
+any way I please without having to think too hard about it.
 
-Belated thanks to Xavier Noria and [everyone
+Many thanks to Xavier Noria and [everyone
 else](https://github.com/fxn/zeitwerk#thanks) who contributed to this
 project!
 
