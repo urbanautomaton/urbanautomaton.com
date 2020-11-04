@@ -119,7 +119,7 @@ operation:
 
 ```ruby
 loader = Zeitwerk::Loader.new
-loader.push_dir('/example')
+loader.push_dir('/ex')
 loader.logger = Logger.new(STDOUT)
 ```
 
@@ -128,15 +128,15 @@ In the example snippets throughout this article, I'll show printed
 output as comments after the line that causes them.
 
 ```ruby
-# /example/a.rb
+# /ex/a.rb
 A = "Hi! I'm ::A"
 ```
 ```ruby
 loader.setup
-# Zeitwerk: autoload set for A, to be loaded from /example/a.rb
+# Zeitwerk: autoload set for A, to be loaded from /ex/a.rb
 
 puts A
-# Zeitwerk: constant A loaded from file /example/a.rb
+# Zeitwerk: constant A loaded from file /ex/a.rb
 # Hi! I'm ::A
 ```
 
@@ -165,7 +165,7 @@ tedious if for every such namespace we had to create boilerplate files
 for them like this:
 
 ```ruby
-# /example/c.rb
+# /ex/c.rb
 module C
 end
 ```
@@ -183,20 +183,20 @@ how to load `C` in advance?
 Let's look at what happens when we have a single file in a directory:
 
 ```ruby
-# /example/c/d.rb
+# /ex/c/d.rb
 C::D = "Hi! I'm C::D"
 ```
 ```ruby
 loader.setup
-# Zeitwerk: autoload set for C, to be autovivified from /example/c
+# Zeitwerk: autoload set for C, to be autovivified from /ex/c
 
 puts C
-# Zeitwerk: module C autovivified from directory /example/c
-# Zeitwerk: autoload set for C::D, to be loaded from /example/c/d.rb
+# Zeitwerk: module C autovivified from directory /ex/c
+# Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
 # C
 
 puts C::D
-# Zeitwerk: constant C::D loaded from file /example/c/d.rb
+# Zeitwerk: constant C::D loaded from file /ex/c/d.rb
 # Hi! I'm C::D
 ```
 
@@ -204,7 +204,7 @@ On the initial setup we can see that Zeitwerk only prepared `C` for
 autoloading. It must therefore have only looked at things immediately in
 the root directory.
 
-In the root directory it only found a directory, `/example/c`, so
+In the root directory it only found a directory, `/ex/c`, so
 instead of saying "`C`...  to be autoloaded" from a file, it said
 "`C`... to be autovivified" from the directory.
 
@@ -220,8 +220,8 @@ How does the autovivification of `C` work, then, if there's no ruby file
 to be read?
 
 Zeitwerk does this by hijacking the loading part of `Module#autoload`.
-When we call `autoload :C, '/example/c'`, this means that when `C` is
-first used, ruby will automatically call `require '/example/c'`.
+When we call `autoload :C, '/ex/c'`, this means that when `C` is
+first used, ruby will automatically call `require '/ex/c'`.
 
 By default, if we try to `require` a directory, ruby will produce a
 `LoadError`. But since `Kernel#require` is a ruby method like any other,
@@ -321,29 +321,29 @@ managed by Zeitwerk.
 Let's watch Zeitwerk do this:
 
 ```ruby
-# /example/c.rb
+# /ex/c.rb
 module C
   def self.hello
     "Hi! I'm ::C"
   end
 end
 
-# /example/c/d.rb
+# /ex/c/d.rb
 module C
   D = "Hi! I'm C::D"
 end
 ```
 ```ruby
 loader.setup
-# Zeitwerk: autoload set for C, to be loaded from /example/c.rb
+# Zeitwerk: autoload set for C, to be loaded from /ex/c.rb
 
 puts C.hello
-# Zeitwerk: autoload set for C::D, to be loaded from /example/c/d.rb
-# Zeitwerk: constant C loaded from file /example/c.rb
+# Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
+# Zeitwerk: constant C loaded from file /ex/c.rb
 # Hi! I'm ::C
 
 puts C::D
-# Zeitwerk: constant C::D loaded from file /example/c/d.rb
+# Zeitwerk: constant C::D loaded from file /ex/c/d.rb
 # Hi! I'm C::D
 ```
 
@@ -362,12 +362,12 @@ Using the same files as our last example:
 
 ```ruby
 loader.setup
-# Zeitwerk: autoload set for C, to be loaded from /example/c.rb
+# Zeitwerk: autoload set for C, to be loaded from /ex/c.rb
 
 module C
-  # Zeitwerk: autoload set for C::D, to be loaded from /example/c/d.rb
-  # Zeitwerk: constant C loaded from file /example/c.rb
-  # Zeitwerk: constant C::D loaded from file /example/c/d.rb
+  # Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
+  # Zeitwerk: constant C loaded from file /ex/c.rb
+  # Zeitwerk: constant C::D loaded from file /ex/c/d.rb
   puts D
   # Hi! I'm C::D
 end
