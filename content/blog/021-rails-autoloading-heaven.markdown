@@ -227,13 +227,13 @@ to be read?
 
 Zeitwerk does this by hijacking the loading part of `Module#autoload`.
 When we call `autoload :C, '/ex/c'`, this means that when `C` is
-first used, ruby will automatically call `require '/ex/c'`.
+f[irst used, ruby will automatically call `require '/ex/c'`.
 
 By default, if we try to `require` a directory, ruby will produce a
-`LoadError`. But since `Kernel#require` is a ruby method like any other,
-Zeitwerk is able to [intercept that `require`
+`LoadError`. But since `Kernel#require` is a ruby method like any
+other, Zeitwerk is able to [intercept that `require`
 call](https://github.com/fxn/zeitwerk/blob/034ae30d73247b8dda7df2992903ce560cd7f47f/lib/zeitwerk/kernel.rb#L24-L32)
-with a bit of monkey-patching:
+with a bit of monkey-patching[^3]:
 
 ```ruby
 # lib/zeitwerk/kernel.rb
@@ -271,7 +271,7 @@ For every file loaded in your program, Zeitwerk does the following:
 * If it's a directory the loader manages&hellip;
   * *Autovivify the module, and set up the subdirectory for autoloading*
 * Else the loader doesn't manage it, so&hellip;
-  * *Let ruby load it*[^3]
+  * *Let ruby load it*[^4]
 
 The directory-handling code is fairly dense, but [here we can see the
 namespace module being
@@ -412,14 +412,23 @@ project!
   happened in 2020.
 
 [^2]:
-  In fact, Zeitwerk lazily descends into subdirectories of its root
-  paths, so some files can be autoloaded even if they're created after
-  initialisation, as long as they're created in an as-yet-unloaded
-  subdirectory. I don't think that's an important capability, though;
-  my suspicion is that the laziness is more of a resource optimisation.
+  This isn't quite true; Zeitwerk lazily descends into subdirectories of
+  its root paths, so some files can be autoloaded even if they're
+  created after initialisation, as long as they're created in an
+  as-yet-unloaded subdirectory. I don't think that's an important
+  capability, though; my suspicion is that the laziness is more of a
+  resource optimisation.
 
 [^3]:
-  In fact, there's some extra handling in the unmanaged path that I
-  think is used to handle people calling `require 'some_managed_file'`
-  without an absolute reference. But I think that's a bit of an edge
-  case.
+  As Tom Stuart [pointed out to me on
+  Twitter](https://twitter.com/tomstuart/status/1324445849695432710),
+  `Module#autoload` hasn't always called `Kernel#require`; it was
+  [modified in
+  2015](https://github.com/ruby/ruby/commit/cd465d552c3a00341f4cb7f1d7a793d0ebcb6cde),
+  precisely to allow this sort of neat trick.
+
+[^4]:
+  There's actually some extra handling in the "unmanaged" path that I
+  skipped over, and which I think is used to handle people calling
+  `require 'some_zeitwerk_managed_file'` without an absolute reference.
+  But I think that's a bit of an edge case.
