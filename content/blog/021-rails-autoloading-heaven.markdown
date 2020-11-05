@@ -113,6 +113,8 @@ loader to support only files that exist when it's initialised,
 `Module#autoload` becomes an option. And indeed, that's what Zeitwerk
 does.[^2] Let's watch it in action.
 
+## Loading a single file
+
 To use Zeitwerk, we initialise a loader, and give it one or more root
 directories to load from. By adding a logger, we can see it in
 operation:
@@ -189,15 +191,6 @@ C::D = "Hi! I'm C::D"
 ```ruby
 loader.setup
 # Zeitwerk: autoload set for C, to be autovivified from /ex/c
-
-puts C
-# Zeitwerk: module C autovivified from directory /ex/c
-# Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
-# C
-
-puts C::D
-# Zeitwerk: constant C::D loaded from file /ex/c/d.rb
-# Hi! I'm C::D
 ```
 
 On the initial setup we can see that Zeitwerk only prepared `C` for
@@ -208,10 +201,23 @@ In the root directory it only found a directory, `/ex/c`, so
 instead of saying "`C`...  to be autoloaded" from a file, it said
 "`C`... to be autovivified" from the directory.
 
+```ruby
+puts C
+# Zeitwerk: module C autovivified from directory /ex/c
+# Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
+# C
+```
+
 Then when we refer to `C`, we see it [get
 autovivified](https://github.com/fxn/zeitwerk/blob/034ae30d73247b8dda7df2992903ce560cd7f47f/lib/zeitwerk/loader/callbacks.rb#L39-L40),
 and then `C::D` gets set up for autoloading - Zeitwerk must have
 descended into the `c` directory to look for more things to autoload.
+
+```ruby
+puts C::D
+# Zeitwerk: constant C::D loaded from file /ex/c/d.rb
+# Hi! I'm C::D
+```
 
 Finally we refer to `C::D`, and that gets autoloaded from `c/d.rb`,
 a regular ruby file.
@@ -383,8 +389,8 @@ Consequently `c.rb` would never be loaded, and the method `C.hello`
 would never be defined.
 
 With TracePoint, however, we can spot the re-definition of constants
-that the autoloader should be responsible, and pre-emptively load the
-relevant file from our loader path (if it exists).
+that the autoloader should be responsible for, and pre-emptively load
+the relevant file from our loader path (if it exists).
 
 ## Conclusion
 
