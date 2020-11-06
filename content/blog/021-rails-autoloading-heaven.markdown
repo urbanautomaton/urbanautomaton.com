@@ -373,8 +373,8 @@ loader.setup
 module C
   # Zeitwerk: autoload set for C::D, to be loaded from /ex/c/d.rb
   # Zeitwerk: constant C loaded from file /ex/c.rb
-  # Zeitwerk: constant C::D loaded from file /ex/c/d.rb
   puts D
+  # Zeitwerk: constant C::D loaded from file /ex/c/d.rb
   # Hi! I'm C::D
 end
 
