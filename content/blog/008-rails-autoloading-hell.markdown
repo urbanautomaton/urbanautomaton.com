@@ -7,6 +7,13 @@ draft: false
 categories: [Rails, autoloading, magic]
 ---
 
+## Update, 2020-11-04
+
+I've written [an article about the workings of the new loader for Rails
+6, Zeitwerk](/blog/2020/11/04/rails-autoloading-heaven/). It avoids all
+of the pitfalls described below and is much easier to understand, which
+really is fantastic.
+
 ## Update, 2020-03-21
 
 As of Rails 6, the autoloading framework used
