@@ -416,8 +416,11 @@ project!
   its root paths, so some files can be autoloaded even if they're
   created after initialisation, as long as they're created in an
   as-yet-unloaded subdirectory. I don't think that's an important
-  capability, though; my suspicion is that the laziness is more of a
-  resource optimisation.
+  feature, though. <del>My suspicion is that the laziness is more of a
+  resource optimisation.</del> This is a consequence of the fact that to
+  set up autoloading for `C::D`, we need to call `C.autoload(:d,
+  '/ex/c/d.rb')`. We can't do this until `C` is loaded, so the
+  autoloading of nested constants has to be lazy.
 
 [^3]:
   As Tom Stuart [pointed out to me on
