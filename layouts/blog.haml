@@ -16,3 +16,5 @@
         .clear
         - if has_comments?(@item)
           = render('snippets/disqus')
+        - else
+          = render('snippets/discuss')

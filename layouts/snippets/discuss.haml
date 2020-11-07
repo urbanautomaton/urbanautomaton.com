@@ -1,0 +1,10 @@
+- if @item[:lobsters] || @item[:twitter]
+  <hr>
+  Discuss this topic on:
+  %ul
+    - if @item[:lobsters]
+      %li
+        %a{ href: @item[:lobsters] }lobste.rs
+    - if @item[:twitter]
+      %li
+        %a{ href: @item[:twitter] }Twitter
