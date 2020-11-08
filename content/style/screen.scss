@@ -5,16 +5,9 @@
 @import "solarized";
 @import "console";
 
-body {
-  @include respond-to(small-screens) {
-    font-size: 0.8em;
-  }
-}
-
 #main {
   @include respond-to(small-screens) {
-    min-width: 40em;
-    width: 100%;
+    min-width: 30em;
   }
   @include respond-to(medium-screens) {
     width: 100%;
@@ -40,6 +33,7 @@ body {
     // Shade and adjust margins to compensate
     @include border-radius(4px);
     margin-bottom: $typeup-lineHeight + .5em;
+    overflow-x: scroll;
   }
   code {
     @include border-radius(3px);
