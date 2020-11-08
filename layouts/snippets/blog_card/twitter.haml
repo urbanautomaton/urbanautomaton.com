@@ -1,3 +1,5 @@
 %meta{ name: "twitter:card", content: "summary" }
 %meta{ name: "twitter:site", content: "@urbanautomaton" }
 %meta{ name: "twitter:title", content: @item[:title] }
+- if @item[:description]
+  %meta{ name: "twitter:description", content: @item[:description] }

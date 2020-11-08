@@ -1,6 +1,7 @@
 ---
 kind: article
 title: Rails autoloading &#8212; now it works, and how!
+description: An in-depth look at Zeitwerk, the new autoloader in Rails 6
 created_at: 2020-11-04T20:28:47+00:00
 comments: false
 lobsters: https://lobste.rs/s/27vvoa/rails_autoloading_now_it_works_how
