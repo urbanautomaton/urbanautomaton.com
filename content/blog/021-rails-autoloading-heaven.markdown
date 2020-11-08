@@ -230,7 +230,7 @@ to be read?
 
 Zeitwerk does this by hijacking the loading part of `Module#autoload`.
 When we call `autoload :C, '/ex/c'`, this means that when `C` is
-f[irst used, ruby will automatically call `require '/ex/c'`.
+first used, ruby will automatically call `require '/ex/c'`.
 
 By default, if we try to `require` a directory, ruby will produce a
 `LoadError`. But since `Kernel#require` is a ruby method like any
