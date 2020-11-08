@@ -5,12 +5,12 @@
 - if @item[:description]
   %meta{ :name => "description", :content => @item[:description] }
 
-%link{ :rel => "preload", :href => "/fonts/merriweather-normal-400.woff" }
-%link{ :rel => "preload", :href => "/fonts/merriweather-normal-700.woff" }
-%link{ :rel => "preload", :href => "/fonts/open-sans-italic-400.woff" }
-%link{ :rel => "preload", :href => "/fonts/open-sans-normal-400.woff" }
-%link{ :rel => "preload", :href => "/fonts/open-sans-normal-600.woff" }
-%link{ :rel => "preload", :href => "/fonts/open-sans-normal-800.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/merriweather-normal-400.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/merriweather-normal-700.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/open-sans-italic-400.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/open-sans-normal-400.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/open-sans-normal-600.woff" }
+%link{ :rel => "preload", :as => "font", :crossorigin => "anonymous", :type => "font/woff", :href => "/fonts/open-sans-normal-800.woff" }
 
 %link{ :rel => "stylesheet", :href => "/style/screen.css", :media => "screen" }
 %link{ :rel => "stylesheet", :href => "/style/print.css",  :media => "print" }
